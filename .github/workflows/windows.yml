@@ -29,12 +29,10 @@ jobs:
         shell: pwsh
         run: |
           mkdir build
-          cd build
           cmake -G "${{ matrix.config.GENERATOR }}"  -A x64 `
             -D CMAKE_BUILD_TYPE=${{ matrix.config.BUILD_TYPE }} `
 
       - name: Build
         shell: pwsh
         run: |
-          cd build
           cmake --build  . --config ${{ matrix.config.BUILD_TYPE }}
