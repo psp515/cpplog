@@ -1,1 +1,1 @@
-project(clog_tests)
+project(cpplog_tests)

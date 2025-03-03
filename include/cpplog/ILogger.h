@@ -9,7 +9,7 @@
 
 using namespace std;
 
-namespace clog {
+namespace cpplog {
     class ILogger {
     public:
         virtual ~ILogger() = default;

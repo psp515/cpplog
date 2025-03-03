@@ -10,7 +10,7 @@
 
 using namespace std;
 
-namespace clog {
+namespace cpplog {
     class BaseLogger : public ILogger {
     public:
         BaseLogger(LogLevel logLevel);

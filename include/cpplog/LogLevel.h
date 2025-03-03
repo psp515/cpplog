@@ -5,7 +5,7 @@
 #ifndef LOGLEVEL_H
 #define LOGLEVEL_H
 
-namespace clog {
+namespace cpplog {
     enum LogLevel {
         DEBUG = 0,
         INFO = 1,

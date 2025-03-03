@@ -7,9 +7,9 @@
 #include <iostream>
 #include <ostream>
 
-#include "ILogger.h"
-#include "BaseLogger.h"
-#include "LogLevel.h"
+#include "cpplog/ILogger.h"
+#include "cpplog/BaseLogger.h"
+#include "cpplog/LogLevel.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ int main() {
     try {
         cout << "Initializing example." << endl;
 
-        clog::BaseLogger logger(clog::LogLevel::INFO);
+        cpplog::BaseLogger logger(cpplog::LogLevel::INFO);
 
         logger.debug("Hello World!");
         logger.info("Hello World!");

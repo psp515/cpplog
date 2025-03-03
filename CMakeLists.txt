@@ -2,7 +2,7 @@
 # Options
 # ---------------------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.30)
-project(clog VERSION 1.0.0)
+project(cpplog VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -14,19 +14,15 @@ include(GNUInstallDirs)
 
 set(SRCS src/BaseLogger.cpp)
 
-add_library(clog SHARED
+add_library(cpplog SHARED
         src/BaseLogger.cpp)
 
-target_compile_definitions(clog PUBLIC CLOG_SHARED_LIB)
+target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)
 
-add_library(clog::clog ALIAS clog)
+add_library(cpplog::cpplog ALIAS cpplog)
 
-# ---------------------------------------------------------------------------------------
-# Header Version ??
-# ---------------------------------------------------------------------------------------
-
-add_library(clog_header INTERFACE)
-add_library(clog::clog_header INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>"
+target_include_directories(cpplog PUBLIC
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>"
         "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
 # ---------------------------------------------------------------------------------------
@@ -41,18 +37,38 @@ add_subdirectory(example)
 # ---------------------------------------------------------------------------------------
 
 message("Building Tests")
-add_subdirectory(example)
+add_subdirectory(test)
 
 # ---------------------------------------------------------------------------------------
 # INSTALL
 # ---------------------------------------------------------------------------------------
 
 install(DIRECTORY include/ DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
-install(TARGETS clog spdlog_header_only
-        EXPORT clog
+
+install(TARGETS cpplog
+        EXPORT cpplog
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
-install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc" DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+# ---------------------------------------------------------------------------------------
+# CMake config files
+# ---------------------------------------------------------------------------------------
 
+set(project_config_in "${CMAKE_CURRENT_LIST_DIR}/cmake/cpplogConfig.cmake.in")
+set(project_config_out "${CMAKE_CURRENT_BINARY_DIR}/cpplogConfig.cmake")
+set(config_targets_file "cpplogConfigTargets.cmake")
+set(export_dest_dir "${CMAKE_INSTALL_LIBDIR}/cmake/cpplog")
+set(version_config_file "${CMAKE_CURRENT_BINARY_DIR}/cpplogConfigVersion.cmake")
+
+include(CMakePackageConfigHelpers)
+
+export(TARGETS cpplog NAMESPACE cpplog::
+        FILE "${CMAKE_CURRENT_BINARY_DIR}/${config_targets_file}")
+install(EXPORT cpplog DESTINATION ${export_dest_dir} NAMESPACE cpplog:: FILE ${config_targets_file})
+
+include(CMakePackageConfigHelpers)
+configure_package_config_file("${project_config_in}" "${project_config_out}" INSTALL_DESTINATION ${export_dest_dir})
+
+write_basic_package_version_file("${version_config_file}" COMPATIBILITY SameMajorVersion)
+install(FILES "${project_config_out}" "${version_config_file}" DESTINATION "${export_dest_dir}")

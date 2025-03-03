@@ -3,11 +3,11 @@
 //
 
 #include <iostream>
-#include "clog/BaseLogger.h"
+#include <cpplog/BaseLogger.h>
 
 using namespace std;
 
-namespace clog {
+namespace cpplog {
     BaseLogger::BaseLogger(LogLevel logLevel) {
         this->logLevel = logLevel;
 
