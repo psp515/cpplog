@@ -1,0 +1,40 @@
+name: Build Windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        config:
+          - GENERATOR: "Visual Studio 17 2022"
+            BUILD_TYPE: Release
+            CXX_STANDARD: 20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: CMake
+        shell: pwsh
+        run: |
+          mkdir build
+          cd build
+          cmake -G "${{ matrix.config.GENERATOR }}"  -A x64 `
+            -D CMAKE_BUILD_TYPE=${{ matrix.config.BUILD_TYPE }} `
+
+      - name: Build
+        shell: pwsh
+        run: |
+          cd build
+          cmake --build  . --config ${{ matrix.config.BUILD_TYPE }}

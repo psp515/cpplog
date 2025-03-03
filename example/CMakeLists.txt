@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.30)
 
-find_package(cpplog REQUIRED)
-
 # Add the executable for the example
 add_executable(example example.cpp)
 
