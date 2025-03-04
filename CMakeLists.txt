@@ -47,11 +47,20 @@ add_subdirectory(test)
 
 install(DIRECTORY include/ DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
 
+message(${CMAKE_INSTALL_LIBDIR})
+message(${CMAKE_INSTALL_BINDIR})
+
 install(TARGETS cpplog
         EXPORT cpplog
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+
+set_target_properties(cpplog PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Release"
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Release"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Release")
 
 # ---------------------------------------------------------------------------------------
 # CMake config files
