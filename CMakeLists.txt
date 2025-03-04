@@ -56,12 +56,6 @@ install(TARGETS cpplog
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
-
-set_target_properties(cpplog PROPERTIES
-        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Release"
-        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Release"
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Release")
-
 # ---------------------------------------------------------------------------------------
 # CMake config files
 # ---------------------------------------------------------------------------------------
