@@ -13,7 +13,7 @@ using namespace std;
 namespace cpplog {
     class BaseLogger : public ILogger {
     public:
-        BaseLogger(LogLevel logLevel);
+        BaseLogger(LogLevel log_level);
         void debug(const std::string& message) override;
         void info(const std::string& message) override;
         void warning(const std::string& message) override;

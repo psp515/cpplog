@@ -8,8 +8,8 @@
 using namespace std;
 
 namespace cpplog {
-    BaseLogger::BaseLogger(LogLevel logLevel) {
-        this->logLevel = logLevel;
+    BaseLogger::BaseLogger(const LogLevel log_level) {
+        this->logLevel = log_level;
 
         cout << "Logger Initialized" << endl;
     }

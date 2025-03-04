@@ -23,10 +23,21 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -G "Visual Studio 17 2022" -A x64 -D CMAKE_BUILD_TYPE=Release ..
+          cmake -G "Ninja" -A x64 -D CMAKE_BUILD_TYPE=Release ..
 
       - name: Build
         shell: pwsh
         run: |
           cd build
           cmake --build . --config Release
+
+      - name: Show Build Directory Contents
+        shell: pwsh
+        run: |
+          ls
+          cd build
+          ls
+          cd example
+          ls
+          cd Release
+          ls
