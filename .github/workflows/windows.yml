@@ -29,4 +29,4 @@ jobs:
         shell: pwsh
         run: |
           cd build
-          cmake --build . Release
+          cmake --build . --config Release
