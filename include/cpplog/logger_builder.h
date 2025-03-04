@@ -5,18 +5,20 @@
 #ifndef ILOGGERBUILDER_H
 #define ILOGGERBUILDER_H
 
-#include <cpplog/ISink.h>
-#include <cpplog/ILogger.h>
-#include <cpplog/common/LogLevel.h>
+#include <cpplog/sink.h>
+#include <cpplog/logger.h>
+#include <cpplog/common/level.h>
 
 using namespace std;
+using namespace cpplog::common;
 
 namespace cpplog {
     class LoggerBuilder {
           public:
-void add_sink(ISink sink);
-                void set_target(LogLevel level);
-                ILogger& build();
+          virtual ~LoggerBuilder(){}
+          virtual void add_sink(Sink sink) = 0;
+          virtual void set_target(level level) = 0;
+          virtual Logger& build() = 0;
     };
 }
 

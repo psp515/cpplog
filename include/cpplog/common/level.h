@@ -7,9 +7,9 @@
 
 namespace cpplog {
     namespace common {
-        enum LogLevel {
+        enum level {
             DEBUG = 0,
-INFO = 1,
+            INFO = 1,
             WARNING = 2,
             ERROR = 3,
             CRITICAL = 4,
