@@ -10,7 +10,7 @@
 using namespace std;
 
 namespace cpplog {
-    class ILogger {
+    class Logger {
     public:
         virtual ~ILogger() = default;
 

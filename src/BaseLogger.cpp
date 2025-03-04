@@ -14,7 +14,6 @@ namespace cpplog {
         cout << "Logger Initialized" << endl;
     }
 
-
     void BaseLogger::debug(const string& message) {
         if (logLevel >= DEBUG) {
             cout << "[DEBUG]: " << message << endl;
