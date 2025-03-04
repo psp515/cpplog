@@ -25,6 +25,8 @@ target_include_directories(cpplog PUBLIC
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>"
         "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
+set_target_properties(cpplog PROPERTIES VERSION 1.0)
+
 # ---------------------------------------------------------------------------------------
 # Build Example
 # ---------------------------------------------------------------------------------------

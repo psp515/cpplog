@@ -13,13 +13,6 @@ permissions:
 jobs:
   build:
     runs-on: windows-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        config:
-          - GENERATOR: "Visual Studio 17 2022"
-            BUILD_TYPE: Release
-            CXX_STANDARD: 20
 
     steps:
       - name: Checkout code
@@ -29,10 +22,11 @@ jobs:
         shell: pwsh
         run: |
           mkdir build
-          cmake -G "${{ matrix.config.GENERATOR }}"  -A x64 `
-            -D CMAKE_BUILD_TYPE=${{ matrix.config.BUILD_TYPE }} `
+          cd build
+          cmake -G "Visual Studio 17 2022" -A x64 -D CMAKE_BUILD_TYPE=Release ..
 
       - name: Build
         shell: pwsh
         run: |
-          cmake --build  . --config ${{ matrix.config.BUILD_TYPE }}
+          cd build
+          cmake --build . Release
