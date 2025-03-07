@@ -8,6 +8,7 @@
 #include <ostream>
 
 #include <cpplog/logger.h>
+#include <cpplog/logger_builder.h>
 #include <cpplog/common/level.h>
 #include <cpplog/sinks/console_sink.h>
 
@@ -19,11 +20,16 @@ int main() {
     try {
         cout << "Initializing example." << endl;
 
-        const auto logger = new Logger(ERROR);
+        LoggerBuilder builder;
+
+        builder
+            .set_ignore_level(CRITICAL)
+            .add_sink(make_unique<ConsoleSink>());
+
+        const auto logger = builder.build();
 
         logger->debug("Hello World!");
         logger->info("Hello World!");
-        logger->critical("Hello World!");
         logger->warning("Hello World!");
         logger->error("Hello World!");
         logger->critical("Hello World!");

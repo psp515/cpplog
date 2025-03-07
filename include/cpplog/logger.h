@@ -5,9 +5,6 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include "sinks/console_sink.h"
-
-
 #include <format>
 #include <memory>
 #include <string>
@@ -15,19 +12,21 @@
 #include <cpplog/sink.h>
 #include <cpplog/common/log.h>
 #include <cpplog/common/level.h>
+#include <cpplog/sinks/console_sink.h>
 
 using namespace std;
 using namespace cpplog::common;
+using namespace cpplog::sinks;
 
 namespace cpplog {
     class Logger {
     public:
-        Logger(const level ignore_level) : ignore_level(ignore_level) {
-            //TODO: aLLOW SINKS
-            auto sink = make_unique<sinks::ConsoleSink>();
-            sinks.push_back(std::move(sink));
-        };
-        Logger(const Logger&) = delete;
+        Logger(const level ignore_level) : ignore_level(ignore_level) {};
+
+        Logger(const level ignore_level, std::vector<std::unique_ptr<Sink>> sinks)
+            : ignore_level(ignore_level), sinks(std::move(sinks)) {};
+
+        //Logger(const Logger&) = delete;
         virtual ~Logger() = default;
 
         // template<class... Args>
@@ -42,7 +41,7 @@ namespace cpplog {
         void log(level level, const string& message)const;
         void log(const Log& log)const;
         level ignore_level;
-        vector<unique_ptr<Sink>> sinks;
+        std::vector<std::unique_ptr<Sink>> sinks;
     };
 }
 

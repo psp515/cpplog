@@ -11,6 +11,7 @@ using namespace cpplog::common;
 namespace cpplog {
     class Sink {
       public:
+      virtual ~Sink() = default;
       virtual void log(const Log& log) const = 0;
     };
 }
