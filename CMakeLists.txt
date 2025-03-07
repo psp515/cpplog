@@ -11,11 +11,14 @@ include(GNUInstallDirs)
 # ---------------------------------------------------------------------------------------
 # Shared Library
 # ---------------------------------------------------------------------------------------
+message("Build Library")
 
 set(SRCS src/BaseLogger.cpp)
 
 add_library(cpplog SHARED
-        src/BaseLogger.cpp)
+        src/logger.cpp
+        src/logger_builder.cpp
+)
 
 target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)
 
@@ -44,11 +47,9 @@ add_subdirectory(test)
 # ---------------------------------------------------------------------------------------
 # INSTALL
 # ---------------------------------------------------------------------------------------
+message("Installing")
 
 install(DIRECTORY include/ DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
-
-message(${CMAKE_INSTALL_LIBDIR})
-message(${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS cpplog
         EXPORT cpplog
@@ -60,6 +61,7 @@ install(TARGETS cpplog
 # CMake config files
 # ---------------------------------------------------------------------------------------
 
+message("Cmake configuration")
 set(project_config_in "${CMAKE_CURRENT_LIST_DIR}/cmake/cpplogConfig.cmake.in")
 set(project_config_out "${CMAKE_CURRENT_BINARY_DIR}/cpplogConfig.cmake")
 set(config_targets_file "cpplogConfigTargets.cmake")
