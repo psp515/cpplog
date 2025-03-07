@@ -2,8 +2,8 @@
 // Created by psp515 on 02.03.2025.
 //
 
-#ifndef LOGLEVEL_H
-#define LOGLEVEL_H
+#ifndef LEVEL_H
+#define LEVEL_H
 
 namespace cpplog {
     namespace common {
@@ -17,4 +17,4 @@ namespace cpplog {
     }
 };
 
-#endif //LOGLEVEL_H
+#endif //LEVEL_H

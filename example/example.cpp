@@ -7,24 +7,26 @@
 #include <iostream>
 #include <ostream>
 
-#include "cpplog/ILogger.h"
-#include "cpplog/BaseLogger.h"
-#include "cpplog/LogLevel.h"
+#include <cpplog/logger.h>
+#include <cpplog/common/level.h>
+#include <cpplog/sinks/console_sink.h>
 
 using namespace std;
+using namespace cpplog;
+using namespace cpplog::sinks;
 
 int main() {
     try {
         cout << "Initializing example." << endl;
 
-        cpplog::BaseLogger logger(cpplog::LogLevel::INFO);
+        const auto logger = new Logger(ERROR);
 
-        logger.debug("Hello World!");
-        logger.info("Hello World!");
-        logger.critical("Hello World!");
-        logger.warning("Hello World!");
-        logger.error("Hello World!");
-        logger.critical("Hello World!");
+        logger->debug("Hello World!");
+        logger->info("Hello World!");
+        logger->critical("Hello World!");
+        logger->warning("Hello World!");
+        logger->error("Hello World!");
+        logger->critical("Hello World!");
 
         return 0;
     } catch (const exception& e) {

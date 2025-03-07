@@ -16,7 +16,8 @@ message("Build Library")
 set(SRCS src/BaseLogger.cpp)
 
 add_library(cpplog SHARED
-        src/BaseLogger.cpp)
+        src/logger.cpp
+)
 
 target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)
 

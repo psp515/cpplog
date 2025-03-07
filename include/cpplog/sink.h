@@ -2,14 +2,17 @@
 // Created by psp515 on 04.03.2025.
 //
 
-#ifndef ISINK_H
-#define ISINK_H
+#ifndef SINK_H
+#define SINK_H
+#include <cpplog/common/log.h>
+
+using namespace cpplog::common;
 
 namespace cpplog {
     class Sink {
       public:
-
+      virtual void log(const Log& log) const = 0;
     };
 }
 
-#endif //ISINK_H
+#endif //SINK_H
