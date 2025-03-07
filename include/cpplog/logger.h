@@ -21,10 +21,10 @@ using namespace cpplog::sinks;
 namespace cpplog {
     class Logger {
     public:
-        Logger(const level ignore_level) : ignore_level(ignore_level) {};
+		explicit Logger(const level ignore_level) : ignore_level(ignore_level) {};
 
-        Logger(const level ignore_level, std::vector<std::unique_ptr<Sink>> sinks)
-            : ignore_level(ignore_level), sinks(std::move(sinks)) {};
+        Logger(const level ignore_level, vector<unique_ptr<Sink>> sinks)
+            : ignore_level(ignore_level), sinks(move(sinks)) {};
 
         //Logger(const Logger&) = delete;
         virtual ~Logger() = default;

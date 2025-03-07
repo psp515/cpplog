@@ -20,8 +20,12 @@ LoggerBuilder& LoggerBuilder::add_sink(unique_ptr<Sink> sink)
   return *this;
 }
 
-unique_ptr<Logger> LoggerBuilder::build() const
+unique_ptr<Logger> LoggerBuilder::build()
 {
+  if (!sinks.empty()) {
+    return make_unique<Logger>(ignore_level, move(sinks));
+  }
+
   return make_unique<Logger>(ignore_level);
 }
 
