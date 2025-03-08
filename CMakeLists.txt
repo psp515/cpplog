@@ -18,6 +18,9 @@ set(SRCS src/BaseLogger.cpp)
 add_library(cpplog SHARED
         src/logger.cpp
         src/logger_builder.cpp
+        src/extensions/LevelExtensions.cpp
+        src/extensions/LevelExtensions.h
+        src/sinks/console_sink.cpp
 )
 
 target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)

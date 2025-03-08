@@ -15,8 +15,9 @@ namespace cpplog::common {
       Log(const level level, const string& message) : level(level), message(message) {}
 
       string get_message() const { return message; }
+      level get_level() const { return level; }
 
-    private:
+  private:
       level level;
       string message;
 

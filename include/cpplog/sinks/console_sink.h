@@ -5,17 +5,18 @@
 #ifndef CONSOLE_SINK_H
 #define CONSOLE_SINK_H
 
-#include <iostream>
 #include <cpplog/sink.h>
+#include <mutex>
 
 using namespace std;
+using namespace cpplog::common;
 
 namespace cpplog::sinks {
   class ConsoleSink : public Sink {
   public:
-    void log(const Log& log) const override {
-       cout << log.get_message() << endl;
-    }
+    void log(const Log& log) const override;
+  private:
+  	static mutex mtx;
   };
 }
 
