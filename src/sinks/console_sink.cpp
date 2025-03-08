@@ -13,7 +13,7 @@ using namespace std;
 using namespace cpplog::sinks;
 using namespace cpplog::extensions;
 
-mutex ConsoleSink::mtx;
+std::mutex ConsoleSink::mtx;
 
 void ConsoleSink::log(const Log& log) const {
   const auto level_name = LevelExtensions::level_name(log.get_level());
@@ -22,7 +22,7 @@ void ConsoleSink::log(const Log& log) const {
   const auto time = put_time(localtime(&current_time), "%Y-%m-%d %H:%M:%S");
   const auto message = log.get_message();
 
-  //lock_guard lock{mtx};
+  lock_guard lock{mtx};
 
   cout << "[" << level_name << "] ";
   cout << "[" << time << "] ";

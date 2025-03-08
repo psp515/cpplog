@@ -26,11 +26,17 @@ namespace cpplog {
         Logger(const level ignore_level, vector<unique_ptr<Sink>> sinks)
             : ignore_level(ignore_level), sinks(move(sinks)) {};
 
-        //Logger(const Logger&) = delete;
+        Logger(const Logger&) = delete;
         virtual ~Logger() = default;
 
-        // template<class... Args>
-        // void debug(format_string<Args...> fmt, Args&&... args);
+        /*
+        template<class... Args>
+        void debug(format_string<Args...> fmt, Args&&... args) {
+            if (this->ignore_level > DEBUG)
+                return;
+
+            this->log(DEBUG, fmt, args);
+        } */
 
         void debug(const string& message) const;
         void info(const string& message) const;
@@ -38,7 +44,8 @@ namespace cpplog {
         void error(const string& message) const;
         void critical(const string& message) const;
     private:
-        void log(level level, const string& message)const;
+        void log(level level, const string& message) const;
+        //void log(level level, const format_string<Args...> fmt, Args&&... args) const;
         void log(const Log& log)const;
         level ignore_level;
         std::vector<std::unique_ptr<Sink>> sinks;

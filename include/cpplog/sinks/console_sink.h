@@ -14,9 +14,9 @@ using namespace cpplog::common;
 namespace cpplog::sinks {
   class ConsoleSink : public Sink {
   public:
-    void log(const Log& log) const override;
+  	void log(const Log& log) const override;
   private:
-  	static mutex mtx;
+  	static std::mutex mtx;
   };
 }
 
