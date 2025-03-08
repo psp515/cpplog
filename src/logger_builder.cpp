@@ -20,6 +20,11 @@ LoggerBuilder& LoggerBuilder::add_sink(unique_ptr<Sink> sink)
   return *this;
 }
 
+LoggerBuilder& LoggerBuilder::add_console_sink() {
+  sinks.push_back(make_unique<ConsoleSink>());
+  return *this;
+}
+
 unique_ptr<Logger> LoggerBuilder::build()
 {
   if (!sinks.empty()) {

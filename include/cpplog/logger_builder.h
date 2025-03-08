@@ -17,8 +17,9 @@ namespace cpplog {
   public:
     ~LoggerBuilder() = default;
     LoggerBuilder& add_sink(unique_ptr<Sink> sink);
+    LoggerBuilder& add_console_sink();
     LoggerBuilder& set_ignore_level(level level);
-	unique_ptr<Logger> build();
+	  unique_ptr<Logger> build();
   private:
     vector<unique_ptr<Sink>> sinks;
 	level ignore_level = DEBUG;

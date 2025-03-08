@@ -23,8 +23,8 @@ int main() {
         LoggerBuilder builder;
 
         builder
-            .set_ignore_level(CRITICAL)
-            .add_sink(make_unique<ConsoleSink>());
+            .set_ignore_level(ERROR)
+            .add_console_sink();
 
         const auto logger = builder.build();
 
