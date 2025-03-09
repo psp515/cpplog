@@ -23,11 +23,12 @@ int main() {
         LoggerBuilder builder;
 
         builder
-            .set_ignore_level(ERROR)
+            .set_ignore_level(DEBUG)
             .add_console_sink();
 
         const auto logger = builder.build();
 
+        logger->debug("Debug {} {}", 2, 3);
         logger->debug("Hello World!");
         logger->info("Hello World!");
         logger->warning("Hello World!");

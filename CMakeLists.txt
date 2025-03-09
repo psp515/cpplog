@@ -18,8 +18,8 @@ set(SRCS src/BaseLogger.cpp)
 add_library(cpplog SHARED
         src/logger.cpp
         src/logger_builder.cpp
-        src/extensions/LevelExtensions.cpp
-        src/extensions/LevelExtensions.h
+        src/extensions/level_extensions.cpp
+        src/extensions/level_extensions.h
         src/sinks/console_sink.cpp
 )
 

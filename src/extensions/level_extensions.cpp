@@ -2,10 +2,10 @@
 // Created by kolbe on 08.03.2025.
 //
 
+#include "level_extensions.h"
+#include <cpplog/common/level.h>
 #include <stdexcept>
 #include <string>
-#include <cpplog/common/level.h>
-#include "LevelExtensions.h"
 
 using namespace std;
 using namespace cpplog::common;

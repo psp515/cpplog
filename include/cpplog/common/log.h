@@ -5,6 +5,7 @@
 #ifndef LOG_H
 #define LOG_H
 
+#include <utility>
 #include <cpplog/common/level.h>
 
 using namespace std;
@@ -12,15 +13,14 @@ using namespace std;
 namespace cpplog::common {
   class Log {
     public:
-      Log(const level level, const string& message) : level(level), message(message) {}
+      Log(const level level, string message) : level(level), message(std::move(message)) {}
 
-      string get_message() const { return message; }
-      level get_level() const { return level; }
+      [[nodiscard]] string get_message() const { return message; }
+      [[nodiscard]] level get_level() const { return level; }
 
   private:
       level level;
       string message;
-
   };
 }
 
