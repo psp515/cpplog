@@ -13,12 +13,11 @@ using namespace std;
 using namespace cpplog::sinks;
 using namespace cpplog::extensions;
 
-std::mutex ConsoleSink::mtx;
+mutex ConsoleSink::mtx;
 
 void ConsoleSink::log(const Log& log) const {
   const auto level_name = LevelExtensions::level_name(log.get_level());
-  const auto now = chrono::system_clock::now();
-  const auto current_time = chrono::system_clock::to_time_t(now);
+  const auto current_time = log.get_timestamp();
   const auto time = put_time(localtime(&current_time), "%Y-%m-%d %H:%M:%S");
   const auto message = log.get_message();
 

@@ -12,7 +12,7 @@ using namespace std;
 using namespace cpplog::common;
 
 namespace cpplog::sinks {
-  class ConsoleSink : public Sink {
+  class ConsoleSink final : public Sink {
   public:
   	void log(const Log& log) const override;
   private:

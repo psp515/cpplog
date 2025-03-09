@@ -21,6 +21,7 @@ add_library(cpplog SHARED
         src/extensions/level_extensions.cpp
         src/extensions/level_extensions.h
         src/sinks/console_sink.cpp
+        src/sinks/file_sink.cpp
 )
 
 target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)
