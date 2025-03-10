@@ -16,10 +16,10 @@ using namespace cpplog::extensions;
 
 mutex FileSink::mtx;
 
-FileSink::FileSink(const string& filename) : FileSink(filename, ios::openmode::_S_app) {
+FileSink::FileSink(const string& filename) : FileSink(filename, ios::app) {
 }
 
-FileSink::FileSink(const string& filename, ios::openmode mode) {
+FileSink::FileSink(const string& filename, ios::openmode mode = ios::app) {
 
 	const filesystem::path dir(move(LOG_FOLDER));
 	const auto exists = filesystem::is_directory(dir);
