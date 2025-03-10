@@ -1,21 +1,26 @@
 //
-// Created by kolbe on 07.03.2025.
+// Created by psp515 on 07.03.2025.
 //
 
 #ifndef CONSOLE_SINK_H
 #define CONSOLE_SINK_H
 
-#include <iostream>
+#include <mutex>
 #include <cpplog/sink.h>
+#include <cpplog/sinks/base_sink.h>
 
 using namespace std;
+using namespace cpplog::common;
 
 namespace cpplog::sinks {
-  class ConsoleSink : public Sink {
+  class ConsoleSink final : public BaseSink {
   public:
-    void log(const Log& log) const override {
-       cout << log.get_message() << endl;
-    }
+  	ConsoleSink() = default;
+  	~ConsoleSink() override = default;
+  	ConsoleSink(const ConsoleSink&) = delete;
+  	void log(const Log& log) const override;
+  private:
+  	static std::mutex mtx;
   };
 }
 
