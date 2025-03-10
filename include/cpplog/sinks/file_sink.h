@@ -6,6 +6,7 @@
 #define FILE_SINK_H
 
 #include <mutex>
+#include <fstream>
 #include <cpplog/sink.h>
 #include <cpplog/sinks/base_sink.h>
 
@@ -13,7 +14,7 @@ namespace cpplog::sinks {
 	class FileSink final : public BaseSink {
 	public:
 		explicit FileSink(const string& filename);
-		explicit FileSink(const string& filename, ios_base::openmode mode);
+		explicit FileSink(const string& filename, ios::openmode mode);
 		FileSink(const FileSink&) = delete;
 		~FileSink() override = default;
 

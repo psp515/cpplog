@@ -7,6 +7,7 @@
 #include "../extensions/level_extensions.h"
 #include <cpplog/sinks/file_sink.h>
 #include <fstream>
+#include <ostream>
 #include <filesystem>
 
 using namespace std;
@@ -15,10 +16,10 @@ using namespace cpplog::extensions;
 
 mutex FileSink::mtx;
 
-FileSink::FileSink(const string& filename) : FileSink(filename, ios_base::openmode::_S_app) {
+FileSink::FileSink(const string& filename) : FileSink(filename, ios::openmode::_S_app) {
 }
 
-FileSink::FileSink(const string& filename, ios_base::openmode mode) {
+FileSink::FileSink(const string& filename, ios::openmode mode) {
 
 	const filesystem::path dir(move(LOG_FOLDER));
 	const auto exists = filesystem::is_directory(dir);
