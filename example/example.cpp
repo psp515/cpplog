@@ -18,13 +18,13 @@ using namespace cpplog::sinks;
 
 int main() {
     try {
-        cout << "Initializing example." << endl;
-
         LoggerBuilder builder;
 
         builder
             .set_ignore_level(DEBUG)
-            .add_console_sink();
+            .add_console_sink()
+            .add_console_sink()
+            .add_file_sink("tests.txt");
 
         const auto logger = builder.build();
 

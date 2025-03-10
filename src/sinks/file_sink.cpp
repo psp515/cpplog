@@ -2,8 +2,12 @@
 // Created by psp515 on 09.03.2025.
 //
 
+#define LOG_FOLDER "logs"
+
 #include "../extensions/level_extensions.h"
 #include <cpplog/sinks/file_sink.h>
+#include <fstream>
+#include <filesystem>
 
 using namespace std;
 using namespace cpplog::sinks;
@@ -11,13 +15,35 @@ using namespace cpplog::extensions;
 
 mutex FileSink::mtx;
 
+FileSink::FileSink(const string& filename) : FileSink(filename, ios_base::openmode::_S_app) {
+}
+
+FileSink::FileSink(const string& filename, ios_base::openmode mode) {
+
+	const filesystem::path dir(move(LOG_FOLDER));
+	const auto exists = filesystem::is_directory(dir);
+
+	if (!exists) {
+		filesystem::create_directory(dir);
+	}
+
+	const filesystem::path file(move(filename));
+	const filesystem::path full_path = dir / file;
+
+	ofstream ofs(full_path, mode);
+	ofs.close();
+
+	this->filename = move(full_path.string());
+}
+
 void FileSink::log(const Log& log) const {
-	const auto level_name = LevelExtensions::level_name(log.get_level());
-	const auto current_time = log.get_timestamp();
-	const auto time = put_time(localtime(&current_time), "%Y-%m-%d %H:%M:%S");
-	const auto message = log.get_message();
+	const auto message = format_message(log);
 
 	lock_guard lock{mtx};
 
+	ofstream log_file(filename, ios_base::app);
 
+	log_file << message << endl;
+
+	log_file.close();
 }

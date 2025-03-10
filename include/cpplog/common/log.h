@@ -1,5 +1,5 @@
 //
-// Created by kolbe on 07.03.2025.
+// Created by psp515 on 07.03.2025.
 //
 
 #ifndef LOG_H
