@@ -14,14 +14,13 @@ LoggerBuilder& LoggerBuilder::set_ignore_level(const level level) {
 	return *this;
 }
 
-LoggerBuilder& LoggerBuilder::add_sink(unique_ptr<Sink> sink)
-{
+LoggerBuilder& LoggerBuilder::add_sink(unique_ptr<Sink> sink) {
 	sinks.push_back(move(sink));
   return *this;
 }
 
 LoggerBuilder& LoggerBuilder::add_console_sink() {
-  sinks.push_back(make_unique<ConsoleSink>());
+  sinks.push_back(move(make_unique<ConsoleSink>()));
   return *this;
 }
 

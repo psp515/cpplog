@@ -12,9 +12,10 @@
 namespace cpplog::sinks {
 	class FileSink final : public Sink {
 	public:
-		explicit FileSink(string  filename) : filename(std::move(filename)) {}
+		explicit FileSink(string filename) : filename(std::move(filename)) {}
+		~FileSink() override = default;
 		FileSink(const FileSink&) = delete;
-		
+
 		void log(const Log& log) const override;
 	private:
 		string filename;

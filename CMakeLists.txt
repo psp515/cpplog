@@ -20,6 +20,7 @@ add_library(cpplog SHARED
         src/logger_builder.cpp
         src/extensions/level_extensions.cpp
         src/extensions/level_extensions.h
+        src/sinks/base_sink.cpp
         src/sinks/console_sink.cpp
         src/sinks/file_sink.cpp
 )
