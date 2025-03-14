@@ -1,4 +1,4 @@
-name: Build Windows
+name: Build Windows with MinGW
 
 on:
   workflow_dispatch:
@@ -17,8 +17,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Configure CMake
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      - name: Set up MinGW
+        run: |
+          choco install mingw
+          echo "Adding MinGW to PATH"
+          echo "$(C:/ProgramData/chocolatey/bin/mingw64/bin)" >> $GITHUB_PATH
+
+      - name: Configure CMake with MinGW
+        run: |
+          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
 
       - name: Build cpplog
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target cpplog
