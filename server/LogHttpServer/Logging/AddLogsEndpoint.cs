@@ -32,15 +32,21 @@ public static class AddLogsEndpoint
             logger.LogInformation("Message: {message}", log.Message);
         }
 
-        return Results.Ok();
+        return Results.NoContent();
     }
 
     public static async Task<IResult> AddLog(LogRequest request, ILogger<LogsRequest> logger)
     {
+        if (request.Message.Length == 0)
+        {
+            logger.LogError("Log message is not valid");
+            return Results.BadRequest("No log provided");
+        }
+
         await Task.Delay(2000);
 
         logger.LogInformation("Received log message: {message}", request.Message);
         
-        return Results.Ok();
+        return Results.NoContent();
     }
 }
