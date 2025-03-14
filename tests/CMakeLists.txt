@@ -1,31 +1,43 @@
 project(cpplog_tests)
 
-
 include(FetchContent)
 FetchContent_Declare(
         googletest
         URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
 )
-# For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-enable_testing()
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
 
+
+enable_testing()
 
 set(CPPLOG_SOURCES
         file_sink_tests.cpp)
 
-add_subdirectory(${CMAKE_BINARY_DIR}/googletest)
+add_executable(unit_tests ${CPPLOG_SOURCES})
 
-function(prepare_test test_target lib)
-    add_executable(${test_target} ${CPPLOG_SOURCES})
+target_link_libraries(unit_tests cpplog)
+target_link_libraries(unit_tests gtest gtest_main)
 
-    target_link_libraries(${test_target} ${lib})
-    target_link_libraries(${test_target} GTest::GTest GTest::Main)
+add_test(NAME unit_tests COMMAND unit_tests)
 
-    add_test(NAME ${test_target} COMMAND ${test_target})
-endfunction()
+add_custom_command(TARGET unit_tests POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_BINARY_DIR}/libcpplog.dll
+        ${CMAKE_BINARY_DIR}/tests/
+)
 
-prepare_test(tests cpplog::cpplog)
+add_custom_command(TARGET unit_tests POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_BINARY_DIR}/bin/libgtest.dll
+        ${CMAKE_BINARY_DIR}/tests/
+)
 
+add_custom_command(TARGET unit_tests POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_BINARY_DIR}/bin/libgtest_main.dll
+        ${CMAKE_BINARY_DIR}/tests/
+)
