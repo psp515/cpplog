@@ -23,10 +23,10 @@ jobs:
       - name: Build cpplog
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target cpplog
 
-#      - name: Build example
-#        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target example
+      - name: Test
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target unit_tests
 
-#      - name: Test
-#        working-directory: ${{github.workspace}}/build
-#        run: ctest -C ${{env.BUILD_TYPE}}
-
+      - name: Run Google Tests
+        working-directory: ${{github.workspace}}/build
+        run: .\unit_tests.exe
