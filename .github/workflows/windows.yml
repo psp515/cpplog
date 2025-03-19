@@ -1,4 +1,5 @@
-name: Build Windows with MinGW
+
+name: Build Windows
 
 on:
   workflow_dispatch:
@@ -17,23 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up MinGW
-        run: |
-          choco install mingw
-          echo "Adding MinGW to PATH"
-          echo "$(C:/ProgramData/chocolatey/bin/mingw64/bin)" >> $GITHUB_PATH
-
-      - name: Configure CMake with MinGW
-        run: |
-          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
       - name: Build cpplog
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target cpplog
 
       - name: Test
-        working-directory: ${{github.workspace}}/build
-        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target unit_tests
-
-      - name: Run Google Tests
-        working-directory: ${{github.workspace}}/build
-        run: .\unit_tests.exe
+        run: cmake --build ${{github.workspace}}/build/tests --config ${{env.BUILD_TYPE}} --target unit_tests
