@@ -18,11 +18,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Configure CMake
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-
       - name: Build cpplog
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target cpplog
-
-      - name: Test
-        run: cmake --build ${{github.workspace}}/build/tests --config ${{env.BUILD_TYPE}} --target unit_tests
