@@ -1,0 +1,27 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+#define LOG(message) Logger::log(message, __FUNCTION__)
+
+class Logger {
+public:
+    static void log(const std::string& message, const std::string& functionName) {
+        std::ofstream logFile("log.txt", std::ios::app);
+        if (logFile.is_open()) {
+            logFile << "[Function: " << functionName << "] " << message << std::endl;
+            logFile.close();
+        }
+        std::cout << "[Function: " << functionName << "] " << message << std::endl;
+    }
+};
+
+// Example usage
+void myFunction() {
+    LOG("This is a test log.");
+}
+
+int main() {
+    myFunction();
+    return 0;
+}

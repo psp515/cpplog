@@ -1,1 +1,0 @@
-project(cpplog_tests)

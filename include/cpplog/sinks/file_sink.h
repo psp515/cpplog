@@ -5,6 +5,8 @@
 #ifndef FILE_SINK_H
 #define FILE_SINK_H
 
+#define LOG_FOLDER "logs"
+
 #include <mutex>
 #include <fstream>
 #include <cpplog/sink.h>

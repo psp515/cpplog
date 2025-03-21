@@ -5,7 +5,6 @@
 #ifndef LOG_H
 #define LOG_H
 
-#include <iomanip>
 #include <chrono>
 #include <utility>
 #include <cpplog/common/level.h>
