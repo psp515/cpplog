@@ -8,26 +8,14 @@
 #include <chrono>
 #include <cpplog/common/level.h>
 #include <source_location>
-#include <sstream>
 
 using namespace std;
 
 namespace cpplog::common {
 class Log {
 public:
-	Log(const level level, const string& message, const std::source_location& location) {
-
-		this->level = level;
-		this->message = message;
-		this->timestamp = chrono::system_clock::to_time_t(chrono::system_clock::now());
-
-		ostringstream oss;
-
-		oss << location.file_name() << '(' << location.line() << ':' << location.column() << ")";
-
-		this->file_data = oss.str();
-		this->function_data = location.function_name();
-	}
+	Log(level level, const string& message, const std::source_location& location);
+	Log(level level, const string& message);
 
 	[[nodiscard]] string get_file_data() const {
 		return file_data;

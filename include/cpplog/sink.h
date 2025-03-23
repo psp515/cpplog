@@ -11,11 +11,11 @@ using namespace std;
 using namespace cpplog::common;
 
 namespace cpplog {
-    class Sink {
-      public:
-      virtual ~Sink() = default;
-      virtual void log(const Log& log) const = 0;
-    };
-}
+class Sink {
+public:
+	virtual ~Sink() = default;
+	virtual void log(const Log& log) const = 0;
+};
+} // namespace cpplog
 
 #endif //SINK_H

@@ -2,8 +2,8 @@
 // Created by psp515 on 07.03.2025.
 //
 
-#include <cpplog/logger.h>
 #include <source_location>
+#include <cpplog/logger.h>
 
 using namespace std;
 using namespace cpplog;
