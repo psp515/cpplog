@@ -5,31 +5,41 @@
 #ifndef LOG_H
 #define LOG_H
 
-#include <iomanip>
 #include <chrono>
-#include <utility>
 #include <cpplog/common/level.h>
+#include <source_location>
 
 using namespace std;
 
 namespace cpplog::common {
-  class Log {
-    public:
-      Log(const level level, string message) : level(level), message(std::move(message)) {
-        const auto now = chrono::system_clock::now();
-        timestamp = chrono::system_clock::to_time_t(now);
-      }
+class Log {
+public:
+	Log(level level, const string& message, const std::source_location& location);
+	Log(level level, const string& message);
 
-      [[nodiscard]] time_t get_timestamp() const { return timestamp; }
-      [[nodiscard]] string get_message() const { return message; }
-      [[nodiscard]] level get_level() const { return level; }
+	[[nodiscard]] string get_file_data() const {
+		return file_data;
+	}
+	[[nodiscard]] string get_function_data() const {
+		return function_data;
+	}
+	[[nodiscard]] string get_message() const {
+		return message;
+	}
+	[[nodiscard]] time_t get_timestamp() const {
+		return timestamp;
+	}
+	[[nodiscard]] level get_level() const {
+		return level;
+	}
 
-  private:
-      level level;
-      string message;
-      time_t timestamp;
-  };
-}
-
+private:
+	level level;
+	time_t timestamp;
+	string message;
+	string file_data;
+	string function_data;
+};
+} // namespace cpplog::common
 
 #endif //LOG_H

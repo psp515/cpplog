@@ -16,8 +16,10 @@ message("Build Library")
 set(SRCS src/BaseLogger.cpp)
 
 add_library(cpplog SHARED
+        src/cpplog.cpp
+        src/common/log.cpp
         src/logger.cpp
-        src/logger_builder.cpp
+        src/logger_configurator.cpp
         src/extensions/level_extensions.cpp
         src/extensions/level_extensions.h
         src/sinks/base_sink.cpp
@@ -47,7 +49,7 @@ add_subdirectory(example)
 # ---------------------------------------------------------------------------------------
 
 message("Building Tests")
-add_subdirectory(test)
+add_subdirectory(tests)
 
 # ---------------------------------------------------------------------------------------
 # INSTALL
