@@ -57,7 +57,7 @@ unique_ptr<Logger> LoggerConfigurator::build() {
 	return make_unique<Logger>(ignore_level);
 }
 
-void LoggerConfigurator::configure_default() {
+void LoggerConfigurator::configure() {
 	if(!sinks.empty()) {
 		CppLog::configure(make_unique<Logger>(ignore_level, move(sinks)));
 	} else {

@@ -18,10 +18,6 @@ using namespace std;
 using namespace cpplog::sinks;
 using namespace cpplog::common;
 
-int Add(int a, int b) {
-  return a + b;
-}
-
 // Test case
 TEST(FileSinkTest, CreatesDataInFile) {
 	// Arrange

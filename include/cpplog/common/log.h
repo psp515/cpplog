@@ -18,6 +18,7 @@ public:
 	Log(level level, const string& message, const std::source_location& location);
 	Log(level level, const string& message);
 
+
 	[[nodiscard]] std::thread::id get_thread() const {
 		return this->thread;
 	}
@@ -37,7 +38,7 @@ public:
 	[[nodiscard]] time_t get_timestamp() const {
 		return timestamp;
 	}
-	
+
 	[[nodiscard]] level get_level() const {
 		return level;
 	}

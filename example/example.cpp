@@ -41,7 +41,7 @@ int main() {
     	builder2
     		.set_ignore_level(INFO)
     		.add_console_sink()
-    		.configure_default();
+    		.configure();
 
     	CppLog::debug("No Hello World!");
 		CppLog::info("Hello World!");

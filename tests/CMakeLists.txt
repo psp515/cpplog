@@ -15,7 +15,9 @@ include_directories(${GTEST_INCLUDE_DIRS})
 enable_testing()
 
 set(CPPLOG_SOURCES
-        file_sink_tests.cpp)
+        file_sink_tests.cpp
+        logger_test.cpp
+        logger_test.cpp)
 
 add_executable(unit_tests ${CPPLOG_SOURCES})
 
