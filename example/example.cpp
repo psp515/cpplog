@@ -6,6 +6,7 @@
 #include <exception>
 #include <iostream>
 #include <ostream>
+#include <thread>
 
 #include <cpplog/logger.h>
 #include <cpplog/logger_builder.h>
@@ -28,12 +29,14 @@ int main() {
 
         const auto logger = builder.build();
 
-        logger->debug("Debug {} {}", 2, 3);
+        logger->debug(source_location::current(), "Debug {} {}", 2, 3);
         logger->debug("Hello World!");
         logger->info("Hello World!");
         logger->warning("Hello World!");
         logger->error("Hello World!");
         logger->critical("Hello World!");
+
+        std::cout << std::this_thread::get_id() << endl;
 
         return 0;
     } catch (const exception& e) {

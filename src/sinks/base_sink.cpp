@@ -23,5 +23,5 @@ string BaseSink::format_message(const Log& log) const {
 
 	const auto message = log.get_message();
 
-	return format("[{}][{}] {}", level_name, time_str, message);
+	return format("[{}][{}][{}] {}", level_name, time_str, log.get_function_data(), message);
 }

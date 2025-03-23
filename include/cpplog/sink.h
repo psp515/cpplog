@@ -5,7 +5,6 @@
 #ifndef SINK_H
 #define SINK_H
 
-#include <string>
 #include <cpplog/common/log.h>
 
 using namespace std;

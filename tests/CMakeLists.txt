@@ -30,14 +30,14 @@ add_custom_command(TARGET unit_tests POST_BUILD
         ${CMAKE_BINARY_DIR}/tests/
 )
 
-add_custom_command(TARGET unit_tests POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-        ${CMAKE_BINARY_DIR}/bin/libgtest.dll
-        ${CMAKE_BINARY_DIR}/tests/
-)
-
-add_custom_command(TARGET unit_tests POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-        ${CMAKE_BINARY_DIR}/bin/libgtest_main.dll
-        ${CMAKE_BINARY_DIR}/tests/
-)
+#add_custom_command(TARGET unit_tests POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy
+#        ${CMAKE_BINARY_DIR}/bin/libgtest.dll
+#        ${CMAKE_BINARY_DIR}/tests/
+#)
+#
+#add_custom_command(TARGET unit_tests POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy
+#        ${CMAKE_BINARY_DIR}/bin/libgtest_main.dll
+#        ${CMAKE_BINARY_DIR}/tests/
+#)

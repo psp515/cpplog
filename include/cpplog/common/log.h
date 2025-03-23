@@ -6,29 +6,52 @@
 #define LOG_H
 
 #include <chrono>
-#include <utility>
 #include <cpplog/common/level.h>
+#include <source_location>
+#include <sstream>
 
 using namespace std;
 
 namespace cpplog::common {
-  class Log {
-    public:
-      Log(const level level, string message) : level(level), message(std::move(message)) {
-        const auto now = chrono::system_clock::now();
-        timestamp = chrono::system_clock::to_time_t(now);
-      }
+class Log {
+public:
+	Log(const level level, const string& message, const std::source_location& location) {
 
-      [[nodiscard]] time_t get_timestamp() const { return timestamp; }
-      [[nodiscard]] string get_message() const { return message; }
-      [[nodiscard]] level get_level() const { return level; }
+		this->level = level;
+		this->message = message;
+		this->timestamp = chrono::system_clock::to_time_t(chrono::system_clock::now());
 
-  private:
-      level level;
-      string message;
-      time_t timestamp;
-  };
-}
+		ostringstream oss;
 
+		oss << location.file_name() << '(' << location.line() << ':' << location.column() << ")";
+
+		this->file_data = oss.str();
+		this->function_data = location.function_name();
+	}
+
+	[[nodiscard]] string get_file_data() const {
+		return file_data;
+	}
+	[[nodiscard]] string get_function_data() const {
+		return function_data;
+	}
+	[[nodiscard]] string get_message() const {
+		return message;
+	}
+	[[nodiscard]] time_t get_timestamp() const {
+		return timestamp;
+	}
+	[[nodiscard]] level get_level() const {
+		return level;
+	}
+
+private:
+	level level;
+	time_t timestamp;
+	string message;
+	string file_data;
+	string function_data;
+};
+} // namespace cpplog::common
 
 #endif //LOG_H

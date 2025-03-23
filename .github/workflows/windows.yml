@@ -1,4 +1,3 @@
-
 name: Build Windows
 
 on:
@@ -16,7 +15,35 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up vcpkg
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git
+          cd vcpkg
+          .\bootstrap-vcpkg.bat
+        shell: powershell
+
+      - name: Install Google Test
+        run: |
+          .\vcpkg\vcpkg.exe install gtest
+        shell: powershell
+
+      - name: Configure CMake
+        run: |
+          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DBUILD_TESTING=ON
+        shell: powershell
 
       - name: Build cpplog
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target cpplog
+        shell: powershell
+
+      - name: Build Unit Tests
+        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target unit_tests
+        shell: powershell
+
+      - name: Run Unit Tests with CTest
+        run: |
+          ctest --test-dir ${{github.workspace}}/build --build-config ${{env.BUILD_TYPE}} --output-on-failure
+        shell: powershell
