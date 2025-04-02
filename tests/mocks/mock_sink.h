@@ -6,7 +6,7 @@
 #include <vector>
 
 namespace cpplog::mocks {
-class MockSink : public Sink {
+class MockSink final : public Sink {
 public:
 	MockSink() = default;
 
@@ -14,12 +14,12 @@ public:
 		logs.push_back(log);
 	}
 
-	const std::vector<Log>& get_logs() const {
-		return logs;
+	const std::vector<Log>* get_logs() const {
+		return &logs;
 	}
 
 	// Clear logs for test isolation
-	void clear_logs() {
+	void clear_logs() const {
 		logs.clear();
 	}
 

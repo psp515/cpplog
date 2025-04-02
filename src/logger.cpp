@@ -8,26 +8,6 @@
 using namespace std;
 using namespace cpplog;
 
-void Logger::debug(const string& message, const std::source_location& location) const {
-	this->log(DEBUG, message, location);
-}
-
-void Logger::info(const string& message, const std::source_location& location) const {
-	this->log(INFO, message, location);
-}
-
-void Logger::warning(const string& message, const std::source_location& location) const {
-	this->log(WARNING, message, location);
-}
-
-void Logger::error(const string& message, const std::source_location& location) const {
-	this->log(ERROR, message, location);
-}
-
-void Logger::critical(const string& message, const std::source_location& location) const {
-	this->log(CRITICAL, message, location);
-}
-
 void Logger::log(const level level,
 				 const string& message,
 				 const std::source_location& location) const {

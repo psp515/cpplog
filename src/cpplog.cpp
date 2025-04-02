@@ -8,6 +8,4 @@
 
 using namespace cpplog;
 
-#include <cpplog/cpplog.h>
-
 std::unique_ptr<Logger> CppLog::instance = std::make_unique<Logger>(DEBUG);

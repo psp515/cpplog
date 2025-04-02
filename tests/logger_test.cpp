@@ -12,90 +12,110 @@
 using namespace std;
 using namespace cpplog;
 using namespace cpplog::mocks;
-using namespace cpplog::sinks;
 using namespace cpplog::common;
+
+TEST(LoggerTest, DebugLoggedNoConifgure) {
+	// Arrange
+	auto sink = make_unique<MockSink>();
+	const auto logs = sink->get_logs();
+	LoggerConfigurator configurator;
+	const auto logger = configurator.set_ignore_level(DEBUG)
+		.add_sink(std::move(sink))
+		.build();
+
+	// Act
+	logger->debug("Debug logged");
+
+	// Assert
+	ASSERT_TRUE(logs->at(0).get_level() == DEBUG);
+}
 
 TEST(LoggerTest, DebugLogged) {
 	// Arrange
-	auto sink = unique_ptr<MockSink>();
+	auto sink = make_unique<MockSink>();
+	const auto logs = sink->get_logs();
 	LoggerConfigurator configurator;
-	configurator.set_ignore_level(DEBUG).add_sink(std::move(sink)).configure();
+	configurator.set_ignore_level(DEBUG)
+		.add_sink(std::move(sink))
+		.configure();
 
 	// Act
 	CppLog::debug("Debug logged");
 
 	// Assert
-	ASSERT_TRUE(sink->get_logs()[0].get_level() == DEBUG);
+	ASSERT_TRUE(logs->at(0).get_level() == DEBUG);
 }
 
-//TEST(LoggerTest, DebugAndLowerNotLogged) {
-//	// Arrange
-//	auto sink = unique_ptr<MocksSink>();
-//	LoggerConfigurator configurator;
-//	configurator.set_ignore_level(INFO)
-//		.add_sink(std::move(sink))
-//		.configure();
-//
-//	// Act
-//	CppLog::debug("debug logged");
-//	auto expected_initial = MocksSink::get_last();
-//	CppLog::info("info logged");
-//
-//	// Assert
-//	ASSERT_TRUE(expected_initial.get_message() == MocksSink::InitialMessage);
-//	ASSERT_TRUE(MocksSink::get_last().get_level() == INFO);
-//}
-//
-//TEST(LoggerTest, InfoAndLowerNotLogged) {
-//	// Arrange
-//	auto sink = unique_ptr<MocksSink>();
-//	LoggerConfigurator configurator;
-//	configurator.set_ignore_level(WARNING)
-//		.add_sink(std::move(sink))
-//		.configure();
-//
-//	// Act
-//	CppLog::info("info logged");
-//	auto expected_initial = MocksSink::get_last();
-//	CppLog::warning("info logged");
-//
-//	// Assert
-//	ASSERT_TRUE(expected_initial.get_message() == MocksSink::InitialMessage);
-//	ASSERT_TRUE(MocksSink::get_last().get_level() == WARNING);
-//}
-//
-//TEST(LoggerTest, WarningAndLowerNotLogged) {
-//	// Arrange
-//	auto sink = unique_ptr<MocksSink>();
-//	LoggerConfigurator configurator;
-//	configurator.set_ignore_level(ERROR)
-//		.add_sink(std::move(sink))
-//		.configure();
-//
-//	// Act
-//	CppLog::warning("info logged");
-//	auto expected_initial = MocksSink::get_last();
-//	CppLog::error("info logged");
-//
-//	// Assert
-//	ASSERT_TRUE(expected_initial.get_message() == MocksSink::InitialMessage);
-//	ASSERT_TRUE(MocksSink::get_last().get_level() == ERROR);
-//}
-//
-//TEST(LoggerTest, CriticalLogged) {
-//	// Arrange
-//	auto sink = unique_ptr<MocksSink>();
-//	LoggerConfigurator configurator;
-//	configurator.set_ignore_level(CRITICAL)
-//		.add_sink(std::move(sink))
-//		.configure();
-//
-//	// Act
-//	CppLog::error("info logged");
-//	auto expected_initial = MocksSink::get_last();
-//	CppLog::critical("info logged");
-//
-//	// Assert
-//	ASSERT_TRUE(expected_initial.get_message() == MocksSink::InitialMessage);
-//	ASSERT_TRUE(MocksSink::get_last().get_level() == CRITICAL);
-//}
+TEST(LoggerTest, InfoLoggedLowerNot) {
+	// Arrange
+	auto sink = make_unique<MockSink>();
+	const auto logs = sink->get_logs();
+	LoggerConfigurator configurator;
+	configurator.set_ignore_level(INFO)
+		.add_sink(std::move(sink))
+		.configure();
+
+	// Act
+	CppLog::debug("Debug logged");
+	CppLog::info("Info logged");
+
+	// Assert
+	ASSERT_TRUE(logs->at(0).get_level() == INFO);
+}
+
+TEST(LoggerTest, WarningLoggedLowerNot) {
+	// Arrange
+	auto sink = make_unique<MockSink>();
+	const auto logs = sink->get_logs();
+	LoggerConfigurator configurator;
+	configurator.set_ignore_level(WARNING)
+		.add_sink(std::move(sink))
+		.configure();
+
+	// Act
+	CppLog::debug("Debug logged");
+	CppLog::info("Info logged");
+	CppLog::warning("Warning logged");
+
+	// Assert
+	ASSERT_TRUE(logs->at(0).get_level() == WARNING);
+}
+
+TEST(LoggerTest, ErrorLoggedLowerNot) {
+	// Arrange
+	auto sink = make_unique<MockSink>();
+	const auto logs = sink->get_logs();
+	LoggerConfigurator configurator;
+	configurator.set_ignore_level(ERROR)
+		.add_sink(std::move(sink))
+		.configure();
+
+	// Act
+	CppLog::debug("Debug logged");
+	CppLog::info("Info logged");
+	CppLog::warning("Warning logged");
+	CppLog::error("Error logged");
+
+	// Assert
+	ASSERT_TRUE(logs->at(0).get_level() == ERROR);
+}
+
+TEST(LoggerTest, CriticalLoggedLowerNot) {
+	// Arrange
+	auto sink = make_unique<MockSink>();
+	const auto logs = sink->get_logs();
+	LoggerConfigurator configurator;
+	configurator.set_ignore_level(CRITICAL)
+		.add_sink(std::move(sink))
+		.configure();
+
+	// Act
+	CppLog::debug("Debug logged");
+	CppLog::info("Info logged");
+	CppLog::warning("Warning logged");
+	CppLog::error("Error logged");
+	CppLog::critical("Critical logged");
+
+	// Assert
+	ASSERT_TRUE(logs->at(0).get_level() == CRITICAL);
+}

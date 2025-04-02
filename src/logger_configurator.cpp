@@ -7,7 +7,7 @@
 #include <cpplog/cpplog.h>
 #include <cpplog/logger.h>
 #include <cpplog/logger_configurator.h>
-#include <cpplog/sinks/console_sink.h>
+#include <cpplog/sinks/stdout_sink.h>
 #include <cpplog/sinks/file_sink.h>
 
 using namespace cpplog;
@@ -26,11 +26,11 @@ LoggerConfigurator& LoggerConfigurator::add_sink(unique_ptr<Sink> sink) {
 LoggerConfigurator& LoggerConfigurator::add_console_sink() {
 
 	for(auto& sink : sinks) {
-		if(dynamic_cast<ConsoleSink*>(sink.get()))
+		if(dynamic_cast<StdoutSink*>(sink.get()))
 			return *this;
 	}
 
-	sinks.push_back(move(make_unique<ConsoleSink>()));
+	sinks.push_back(move(make_unique<StdoutSink>()));
 	return *this;
 }
 

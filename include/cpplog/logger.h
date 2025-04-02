@@ -8,7 +8,6 @@
 #include <cpplog/common/level.h>
 #include <cpplog/common/log.h>
 #include <cpplog/sink.h>
-#include <cpplog/sinks/console_sink.h>
 #include <format>
 #include <memory>
 #include <source_location>
@@ -16,7 +15,6 @@
 #include <vector>
 
 using namespace cpplog::common;
-using namespace cpplog::sinks;
 
 namespace cpplog {
 class Logger final {
@@ -41,32 +39,36 @@ public:
 		this->log(DEBUG, location, fmt, forward<Args>(args)...);
 	}
 
-	void debug(const string& message,
-			   const std::source_location& location = std::source_location::current()) const;
+	void debug(const string& message, const std::source_location& location = source_location::current()) const {
+		this->log(DEBUG, message, location);
+	}
 
 	template <class... Args>
 	void info(const std::source_location& location, format_string<Args...> fmt, Args&&... args) {
 		this->log(INFO, location, fmt, forward<Args>(args)...);
 	}
 
-	void info(const string& message,
-			  const std::source_location& location = std::source_location::current()) const;
+	void info(const string& message, const std::source_location& location = source_location::current()) const {
+		this->log(INFO, message, location);
+	}
 
 	template <class... Args>
 	void warning(const std::source_location& location, format_string<Args...> fmt, Args&&... args) {
 		this->log(WARNING, location, fmt, forward<Args>(args)...);
 	}
 
-	void warning(const string& message,
-				 const std::source_location& location = std::source_location::current()) const;
+	void warning(const string& message, const std::source_location& location = source_location::current()) const {
+		this->log(WARNING, message, location);
+	}
 
 	template <class... Args>
 	void error(const std::source_location& location, format_string<Args...> fmt, Args&&... args) {
 		this->log(ERROR, location, fmt, forward<Args>(args)...);
 	}
 
-	void error(const string& message,
-			   const std::source_location& location = std::source_location::current()) const;
+	void error(const string& message, const std::source_location& location = source_location::current()) const {
+		this->log(ERROR, message, location);
+	}
 
 	template <class... Args>
 	void
@@ -74,8 +76,9 @@ public:
 		this->log(CRITICAL, location, fmt, forward<Args>(args)...);
 	}
 
-	void critical(const string& message,
-				  const std::source_location& location = std::source_location::current()) const;
+	void critical(const string& message, const std::source_location& location = source_location::current()) const {
+		this->log(CRITICAL, message, location);
+	}
 
 	void attach_thread_to_formatted_message(const bool& attach) {
 		attach_thread = attach;
