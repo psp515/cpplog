@@ -22,10 +22,14 @@ namespace cpplog {
 class Logger final {
 public:
 	explicit Logger(const level ignore_level)
-		: ignore_level(ignore_level) { };
+		: ignore_level(ignore_level)
+		, attach_thread(false)
+		, attach_source(false) { };
 
 	explicit Logger(const level ignore_level, vector<unique_ptr<Sink>> sinks)
 		: ignore_level(ignore_level)
+		, attach_thread(false)
+		, attach_source(false)
 		, sinks(move(sinks)) { };
 
 	Logger(const Logger&) = delete;
@@ -34,9 +38,6 @@ public:
 
 	template <class... Args>
 	void debug(const std::source_location& location, format_string<Args...> fmt, Args&&... args) {
-		if(this->ignore_level > DEBUG)
-			return;
-
 		this->log(DEBUG, location, fmt, forward<Args>(args)...);
 	}
 
@@ -45,9 +46,6 @@ public:
 
 	template <class... Args>
 	void info(const std::source_location& location, format_string<Args...> fmt, Args&&... args) {
-		if(this->ignore_level > INFO)
-			return;
-
 		this->log(INFO, location, fmt, forward<Args>(args)...);
 	}
 
@@ -56,9 +54,6 @@ public:
 
 	template <class... Args>
 	void warning(const std::source_location& location, format_string<Args...> fmt, Args&&... args) {
-		if(this->ignore_level > WARNING)
-			return;
-
 		this->log(WARNING, location, fmt, forward<Args>(args)...);
 	}
 
@@ -67,9 +62,6 @@ public:
 
 	template <class... Args>
 	void error(const std::source_location& location, format_string<Args...> fmt, Args&&... args) {
-		if(this->ignore_level > ERROR)
-			return;
-
 		this->log(ERROR, location, fmt, forward<Args>(args)...);
 	}
 
@@ -79,14 +71,19 @@ public:
 	template <class... Args>
 	void
 	critical(const std::source_location& location, format_string<Args...> fmt, Args&&... args) {
-		if(this->ignore_level > CRITICAL)
-			return;
-
 		this->log(CRITICAL, location, fmt, forward<Args>(args)...);
 	}
 
 	void critical(const string& message,
 				  const std::source_location& location = std::source_location::current()) const;
+
+	void attach_thread_to_formatted_message(const bool& attach) {
+		attach_thread = attach;
+	}
+
+	void attach_source_to_formatted_message(const bool& attach) {
+		attach_source = attach;
+	}
 
 private:
 	void log(const Log& log) const;
@@ -101,6 +98,9 @@ private:
 	}
 
 	level ignore_level;
+	bool attach_thread;
+	bool attach_source;
+
 	std::vector<std::unique_ptr<Sink>> sinks;
 };
 } // namespace cpplog

@@ -4,11 +4,11 @@
 
 #include <algorithm>
 #include <cpplog/common/level.h>
+#include <cpplog/cpplog.h>
 #include <cpplog/logger.h>
 #include <cpplog/logger_configurator.h>
 #include <cpplog/sinks/console_sink.h>
 #include <cpplog/sinks/file_sink.h>
-#include <cpplog/cpplog.h>
 
 using namespace cpplog;
 using namespace cpplog::sinks;

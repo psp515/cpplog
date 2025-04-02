@@ -5,30 +5,32 @@
 #ifndef LOG_H
 #define LOG_H
 
-#include <thread>
-#include <chrono>
 #include <cpplog/common/level.h>
 #include <source_location>
+#include <thread>
 
 using namespace std;
 
 namespace cpplog::common {
 class Log {
 public:
-	Log(level level, const string& message, const std::source_location& location);
-	Log(level level, const string& message);
+	Log(level level,
+		const string& message,
+		const source_location& location,
+		const bool& attach_source,
+		const bool& attach_thread);
+	Log(level level, const string& message, const bool& attach_source, const bool& attach_thread);
 
-
-	[[nodiscard]] std::thread::id get_thread() const {
+	[[nodiscard]] thread::id get_thread() const {
 		return this->thread;
 	}
 
-	[[nodiscard]] string get_file_data() const {
-		return file_data;
+	[[nodiscard]] string get_source_location_file() const {
+		return source_location_file;
 	}
 
-	[[nodiscard]] string get_function_data() const {
-		return function_data;
+	[[nodiscard]] string get_source_location_function() const {
+		return source_location_function;
 	}
 
 	[[nodiscard]] string get_message() const {
@@ -43,13 +45,27 @@ public:
 		return level;
 	}
 
+	[[nodiscard]] bool should_attach_source() const {
+		return attach_source;
+	}
+
+	[[nodiscard]] bool should_attach_thread() const {
+		return attach_thread;
+	}
+
+	[[nodiscard]] string get_formatted_message() const;
+
 private:
-	std::thread::id thread;
+	thread::id thread;
 	level level;
 	time_t timestamp;
+
+	bool attach_source;
+	bool attach_thread;
+
 	string message;
-	string file_data;
-	string function_data;
+	string source_location_file;
+	string source_location_function;
 };
 } // namespace cpplog::common
 

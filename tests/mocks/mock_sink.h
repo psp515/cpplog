@@ -1,11 +1,11 @@
 #ifndef MOCKSINK_H
 #define MOCKSINK_H
 
+#include <cpplog/common/log.h>
 #include <cpplog/sink.h>
 #include <vector>
-#include <cpplog/common/log.h>
 
-namespace cpplog {
+namespace cpplog::mocks {
 class MockSink : public Sink {
 public:
 	MockSink() = default;
@@ -26,6 +26,6 @@ public:
 private:
 	mutable std::vector<Log> logs;
 };
-}
+} // namespace cpplog
 
 #endif // MOCKSINK_H

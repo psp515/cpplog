@@ -2,14 +2,16 @@
 // Created by psp515 on 23.03.2025.
 //
 
-#include <gtest/gtest.h>
 #include <cpplog/common/level.h>
-#include <cpplog/logger_configurator.h>
 #include <cpplog/cpplog.h>
+#include <cpplog/logger_configurator.h>
+#include <gtest/gtest.h>
 
 #include "mocks/mock_sink.h"
 
 using namespace std;
+using namespace cpplog;
+using namespace cpplog::mocks;
 using namespace cpplog::sinks;
 using namespace cpplog::common;
 
@@ -17,9 +19,7 @@ TEST(LoggerTest, DebugLogged) {
 	// Arrange
 	auto sink = unique_ptr<MockSink>();
 	LoggerConfigurator configurator;
-	configurator.set_ignore_level(DEBUG)
-		.add_sink(std::move(sink))
-		.configure();
+	configurator.set_ignore_level(DEBUG).add_sink(std::move(sink)).configure();
 
 	// Act
 	CppLog::debug("Debug logged");
