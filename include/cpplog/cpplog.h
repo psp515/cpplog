@@ -6,6 +6,8 @@
 #include <source_location>
 #include <string>
 
+using namespace std;
+
 namespace cpplog {
 
 class CppLog {

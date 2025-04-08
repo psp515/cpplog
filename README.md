@@ -1,6 +1,3 @@
-# cpplog
-Simple logging library for c++!
-
 <div align="center">
 
   <h1> cpplog </h1>

@@ -22,7 +22,7 @@ public:
 	LoggerConfigurator& add_file_sink(const string& path, ios_base::openmode mode);
 	LoggerConfigurator& set_ignore_level(level level);
 	unique_ptr<Logger> build();
-	void configure_default();
+	void configure();
 
 private:
 	vector<unique_ptr<Sink>> sinks;

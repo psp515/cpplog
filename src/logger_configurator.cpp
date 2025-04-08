@@ -4,11 +4,11 @@
 
 #include <algorithm>
 #include <cpplog/common/level.h>
+#include <cpplog/cpplog.h>
 #include <cpplog/logger.h>
 #include <cpplog/logger_configurator.h>
-#include <cpplog/sinks/console_sink.h>
+#include <cpplog/sinks/stdout_sink.h>
 #include <cpplog/sinks/file_sink.h>
-#include <cpplog/cpplog.h>
 
 using namespace cpplog;
 using namespace cpplog::sinks;
@@ -26,11 +26,11 @@ LoggerConfigurator& LoggerConfigurator::add_sink(unique_ptr<Sink> sink) {
 LoggerConfigurator& LoggerConfigurator::add_console_sink() {
 
 	for(auto& sink : sinks) {
-		if(dynamic_cast<ConsoleSink*>(sink.get()))
+		if(dynamic_cast<StdoutSink*>(sink.get()))
 			return *this;
 	}
 
-	sinks.push_back(move(make_unique<ConsoleSink>()));
+	sinks.push_back(move(make_unique<StdoutSink>()));
 	return *this;
 }
 
@@ -57,7 +57,7 @@ unique_ptr<Logger> LoggerConfigurator::build() {
 	return make_unique<Logger>(ignore_level);
 }
 
-void LoggerConfigurator::configure_default() {
+void LoggerConfigurator::configure() {
 	if(!sinks.empty()) {
 		CppLog::configure(make_unique<Logger>(ignore_level, move(sinks)));
 	} else {

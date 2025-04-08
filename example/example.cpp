@@ -41,10 +41,10 @@ int main() {
     	builder2
     		.set_ignore_level(INFO)
     		.add_console_sink()
-    		.configure_default();
+    		.configure();
 
-    	CppLog::debug("No Hello World!");
-		CppLog::info("Hello World!");
+    	CppLog::debug("Hello 22 World!");
+		CppLog::info("Hello 22 World!");
 
         return 0;
     } catch (const exception& e) {
