@@ -13,10 +13,8 @@ include(GNUInstallDirs)
 # ---------------------------------------------------------------------------------------
 message("Build Library")
 
-set(SRCS src/BaseLogger.cpp)
-
 add_library(cpplog SHARED
-        include/cpplog/Logger.h)
+        src/common/log_event.cpp)
 
 target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)
 
