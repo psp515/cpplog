@@ -11,24 +11,19 @@
 
 using namespace cpplog::common;
 
-namespace cpplog
-{
-    ///
+namespace cpplog {
     /// Base class representing sink.
-    ///
-    class Sink
-    {
+    class Sink {
     public:
-
         ///
         /// Disabled possibility to copy object.
         ///
-        Sink(Sink const&) = delete;
+        Sink(Sink const &) = delete;
 
         ///
         /// Disabled possibility to assign object.
         ///
-        Sink& operator=(Sink const&) = delete;
+        Sink &operator=(Sink const &) = delete;
 
         virtual ~Sink() = default;
 
@@ -36,14 +31,15 @@ namespace cpplog
         /// Creates sink with specified base log level
         ///
         /// @param level Level for events to ignore.
-        explicit Sink(const LogLevel level) : level(level) {}
+        explicit Sink(const LogLevel level) : level(level) {
+        }
 
         ///
         /// Function used to log event to specified sink.
         ///
-        /// @param options Options used to create formatted message.
-        /// @param event Event data.
-        virtual void log(const LogEventOptions& options, const LogEvent& event) = 0;
+        /// @param log Event data.
+        /// @param options Event format options.
+        virtual void log(const LogEventOptions &options, const LogEvent &log) = 0;
 
     private:
         LogLevel level = INFO;

@@ -30,7 +30,7 @@ namespace cpplog::common
         /// @param level Level of event.
         /// @param message User message of event.
         /// @param source Source code of event.
-        explicit LogEvent(LogLevel& level, string& message, const source_location& source) : LogEvent(level, message)
+        explicit LogEvent(const LogLevel& level, const string& message, const source_location& source) : LogEvent(level, message)
         {
             this->source = source;
             this->has_source = true;
@@ -41,7 +41,7 @@ namespace cpplog::common
         ///
         /// @param level Level of event.
         /// @param message User message of event.
-        explicit LogEvent(LogLevel& level, string& message) : message(message), level(level), has_source(false)
+        explicit LogEvent(const LogLevel& level, const string& message) : message(message), level(level), has_source(false)
         {
             this->thread = this_thread::get_id();
             this->timestamp = chrono::system_clock::to_time_t(chrono::system_clock::now());

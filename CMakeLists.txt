@@ -15,8 +15,11 @@ message("Build Library")
 
 add_library(cpplog SHARED
         src/common/log_event.cpp
-        include/cpplog/logger.h
-        include/cpplog/sink.h)
+        src/logger_configuration.cpp
+        src/cpplog.cpp
+        src/sinks/stdout_sink.cpp
+        src/extensions/formatter.cpp
+        src/extensions/formatter.h)
 
 target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)
 

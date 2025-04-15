@@ -19,7 +19,7 @@ namespace cpplog::common
         /// @param json Tells if output event message should be json.
         /// @param thread Tells if output event message should have thread id.
         /// @param source Tells if output event message should have source code information.
-        LogEventOptions(const bool json, const bool thread, const bool source) : json(json), thread(thread),
+        explicit  LogEventOptions(const bool json, const bool thread, const bool source) : json(json), thread(thread),
                                                                                  source(source)
         {
         }
@@ -27,7 +27,7 @@ namespace cpplog::common
         ///
         /// Creates base event options.
         ///
-        LogEventOptions();
+        LogEventOptions() = default;
 
         ///
         /// Tells if message should be logged as json.
