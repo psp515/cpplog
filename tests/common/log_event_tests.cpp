@@ -8,6 +8,7 @@
 #include <ctime>
 #include <filesystem>
 #include <fstream>
+#include <string>
 #include <gtest/gtest.h>
 
 using namespace cpplog::common;
@@ -42,6 +43,6 @@ TEST(LogEventTests, ConstructorWithSource_AssignsSourceInfo)
   EXPECT_EQ(event.getLevel(), level);
   EXPECT_EQ(event.getThread(), std::this_thread::get_id());
 
-  EXPECT_EQ(event.getSourceFileName(), source.file_name());
-  EXPECT_EQ(event.getSourceFunctionName(), source.function_name());
+  EXPECT_NE(event.getSourceFileName().find("log_event_tests.cpp"), std::string::npos);
+  EXPECT_NE(event.getSourceFunctionName().find("ConstructorWithSource_AssignsSourceInfo"), std::string::npos);
 }

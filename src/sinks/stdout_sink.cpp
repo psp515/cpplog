@@ -15,8 +15,8 @@ using namespace cpplog::extensions;
 mutex StdoutSink::mtx;
 
 void StdoutSink::log(const LogEventOptions &options, const LogEvent& event) {
-
-    const auto log_message = Formatter::format(options, event);
+    Formatter formatter;
+    const auto log_message = formatter.format(options, event);
 
     lock_guard lock{mtx};
     cout << log_message << endl;

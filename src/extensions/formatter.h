@@ -14,7 +14,7 @@ using namespace cpplog::common;
 namespace cpplog::extensions {
     class Formatter {
         public:
-            static string format(const LogEventOptions &options, const LogEvent &event);
+            string format(const LogEventOptions &options, const LogEvent &event);
     };
 }
 
