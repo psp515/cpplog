@@ -16,15 +16,16 @@ using namespace cpplog;
 using namespace cpplog::mocks;
 using namespace cpplog::common;
 
-TEST(LoggerTest, LogsMessageAtLevel) {
+TEST(LoggerTest, LogsMessageAtLevel)
+{
     // Arrange
     const string expectedMessage = "Debug message";
-    shared_ptr<vector<pair<LogEvent, LogEventOptions>>> logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
+    auto logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
     auto mockSink = make_unique<MockSink>(INFO, logs);
     auto logger = LoggerConfiguration()
-                     .set_level(INFO)
-                     .add_sink(std::move(mockSink))
-                     .build();
+                  .setLoggerFilteringLevel(INFO)
+                  .addSink(std::move(mockSink))
+                  .build();
 
     // Act
     logger->info(expectedMessage);
@@ -37,15 +38,16 @@ TEST(LoggerTest, LogsMessageAtLevel) {
     EXPECT_EQ(event.getMessage(), expectedMessage);
 }
 
-TEST(LoggerTest, DoesNotLogBelowConfiguredLevel) {
+TEST(LoggerTest, DoesNotLogBelowConfiguredLevel)
+{
     // Arrange
     const string expectedMessage = "Debug message";
-    shared_ptr<vector<pair<LogEvent, LogEventOptions>>> logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
+    auto logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
     auto mockSink = make_unique<MockSink>(WARN, logs);
     auto logger = LoggerConfiguration()
-                     .set_level(WARN)
-                     .add_sink(std::move(mockSink))
-                     .build();
+                  .setLoggerFilteringLevel(WARN)
+                  .addSink(std::move(mockSink))
+                  .build();
 
     // Act
     logger->info("This should not be logged");
@@ -54,15 +56,16 @@ TEST(LoggerTest, DoesNotLogBelowConfiguredLevel) {
     EXPECT_TRUE(logs->empty());
 }
 
-TEST(LoggerTest, LogsWithSourceLocation) {
+TEST(LoggerTest, LogsWithSourceLocation)
+{
     // Arrange
     const std::string msg = "Log with explicit location";
-    shared_ptr<vector<pair<LogEvent, LogEventOptions>>> logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
+    auto logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
     auto mockSink = make_unique<MockSink>(INFO, logs);
     auto logger = LoggerConfiguration()
-                     .set_level(INFO)
-                     .add_sink(std::move(mockSink))
-                     .build();
+                  .setLoggerFilteringLevel(INFO)
+                  .addSink(std::move(mockSink))
+                  .build();
 
     // Act
     logger->info(msg);
@@ -76,15 +79,16 @@ TEST(LoggerTest, LogsWithSourceLocation) {
     EXPECT_TRUE(event.getSourceFileName().find("logger_tests.cpp"));
 }
 
-TEST(LoggerTest, TemplateLogsWithSourceLocation) {
+TEST(LoggerTest, TemplateLogsWithSourceLocation)
+{
     // Arrange
     const std::string msg = "Log with explicit location 1";
-    shared_ptr<vector<pair<LogEvent, LogEventOptions>>> logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
+    auto logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
     auto mockSink = make_unique<MockSink>(WARN, logs);
     auto logger = LoggerConfiguration()
-                     .set_level(WARN)
-                     .add_sink(std::move(mockSink))
-                     .build();
+                  .setLoggerFilteringLevel(WARN)
+                  .addSink(std::move(mockSink))
+                  .build();
 
     // Act
     logger->warning(source_location::current(), "Log with explicit location {0}", 1);
@@ -98,17 +102,18 @@ TEST(LoggerTest, TemplateLogsWithSourceLocation) {
     EXPECT_TRUE(event.getSourceFileName().find("logger_tests.cpp"));
 }
 
-TEST(LoggerTest, CorrectOptionsPass) {
+TEST(LoggerTest, CorrectOptionsPass)
+{
     // Arrange
     const std::string expectedMessage1 = "Value: 42";
     const std::string expectedMessage2 = "Value: 41";
 
-    shared_ptr<vector<pair<LogEvent, LogEventOptions>>> logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
+    auto logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
     auto mockSink = make_unique<MockSink>(WARN, logs);
     auto logger = LoggerConfiguration()
-                     .set_level(WARN)
-                     .add_sink(std::move(mockSink))
-                     .build();
+                  .setLoggerFilteringLevel(WARN)
+                  .addSink(std::move(mockSink))
+                  .build();
 
     // Act
     logger->warning(source_location::current(), "Value: {}", 42);

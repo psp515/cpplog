@@ -24,7 +24,7 @@ namespace cpplog {
         /// @param level The minimum log level to allow messages through logger (you can override this level in concrete sink).
         /// @return Reference to this LoggerConfiguration for method chaining.
         ///
-        LoggerConfiguration& set_level(LogLevel level);
+        LoggerConfiguration& setLoggerFilteringLevel(LogLevel level);
 
         ///
         /// Adds a custom sink to the logger's sink list.
@@ -32,7 +32,7 @@ namespace cpplog {
         /// @param sink A unique pointer to a Sink instance that will handle log events.
         /// @return Reference to this LoggerConfiguration for method chaining.
         ///
-        LoggerConfiguration& add_sink(unique_ptr<Sink> sink);
+        LoggerConfiguration& addSink(unique_ptr<Sink> sink);
 
         ///
         /// Adds a default standard output sink to the logger.
@@ -40,7 +40,7 @@ namespace cpplog {
         /// @param level Override level for ignoring messages.
         /// @return Reference to this LoggerConfiguration for method chaining.
         ///
-        LoggerConfiguration& add_stdout_sink(LogLevel level = DEBUG);
+        LoggerConfiguration& addStdoutSink(LogLevel level = DEBUG);
 
         ///
         /// Applies this configuration to the global/default logger instance.

@@ -26,17 +26,17 @@ void LoggerConfiguration::configure() {
 }
 
 
-LoggerConfiguration& LoggerConfiguration::set_level(const LogLevel level) {
+LoggerConfiguration& LoggerConfiguration::setLoggerFilteringLevel(const LogLevel level) {
     this->level = level;
     return *this;
 }
 
-LoggerConfiguration &LoggerConfiguration::add_sink(unique_ptr<Sink> sink) {
+LoggerConfiguration &LoggerConfiguration::addSink(unique_ptr<Sink> sink) {
     sinks.push_back(move(sink));
     return *this;
 }
 
-LoggerConfiguration &LoggerConfiguration::add_stdout_sink(LogLevel level) {
+LoggerConfiguration &LoggerConfiguration::addStdoutSink(LogLevel level) {
     sinks.push_back(make_unique<StdoutSink>(level));
     return *this;
 }

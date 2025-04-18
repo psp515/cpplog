@@ -17,8 +17,8 @@ int main() {
 
         LoggerConfiguration configuration;
 
-        configuration.set_level(INFO)
-            .add_stdout_sink()
+        configuration.setLoggerFilteringLevel(INFO)
+            .addStdoutSink()
             .configure();
 
         CppLog::debug("Debug Level");

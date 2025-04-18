@@ -38,7 +38,7 @@ namespace cpplog {
         /// @param args Format arguments.
         ///
         template<class... Args>
-        static void debug(const source_location &location, const string &fmt, Args &&... args) {
+        static void debug(const source_location &location, format_string<Args...> fmt, Args &&... args) {
             if (instance) {
                 instance->debug(location, fmt, forward<Args>(args)...);
             }
@@ -79,7 +79,7 @@ namespace cpplog {
         /// @param args Format arguments.
         ///
         template<class... Args>
-        static void info(const source_location &location, const string &fmt, Args &&... args) {
+        static void info(const source_location &location, format_string<Args...> fmt, Args &&... args) {
             if (instance) {
                 instance->info(location, fmt, forward<Args>(args)...);
             }
@@ -107,7 +107,7 @@ namespace cpplog {
         /// @param args Format arguments.
         ///
         template<class... Args>
-        static void warning(const source_location &location, const string &fmt, Args &&... args) {
+        static void warning(const source_location &location, format_string<Args...> fmt, Args &&... args) {
             if (instance) {
                 instance->warning(location, fmt, forward<Args>(args)...);
             }
@@ -135,7 +135,7 @@ namespace cpplog {
         /// @param args Format arguments.
         ///
         template<class... Args>
-        static void error(const source_location &location, const string &fmt, Args &&... args) {
+        static void error(const source_location &location, format_string<Args...> fmt, Args &&... args) {
             if (instance) {
                 instance->error(location, fmt, forward<Args>(args)...);
             }
@@ -163,7 +163,7 @@ namespace cpplog {
         /// @param args Format arguments.
         ///
         template<class... Args>
-        static void critical(const source_location &location, const string &fmt, Args &&... args) {
+        static void critical(const source_location &location, format_string<Args...> fmt, Args &&... args) {
             if (instance) {
                 instance->critical(location, fmt, forward<Args>(args)...);
             }

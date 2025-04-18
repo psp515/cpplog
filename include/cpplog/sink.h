@@ -41,7 +41,7 @@ namespace cpplog {
         /// @param options Event format options.
         virtual void log(const LogEventOptions &options, const LogEvent &log) = 0;
 
-    private:
+    protected:
         LogLevel level = INFO;
     };
 }

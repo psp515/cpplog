@@ -15,8 +15,10 @@ enable_testing()
 
 set(CPPLOG_SOURCES
         common/log_event_tests.cpp
+        extensions/formatter_tests.cpp
         logger_tests.cpp
-        extensions/formatter_tests.cpp)
+        cpplog_tests.cpp
+        sinks/stdout_sink_tests.cpp)
 
 add_executable(unit_tests ${CPPLOG_SOURCES})
 
