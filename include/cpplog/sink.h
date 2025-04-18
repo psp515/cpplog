@@ -37,9 +37,9 @@ namespace cpplog {
         ///
         /// Function used to log event to specified sink.
         ///
-        /// @param log Event data.
+        /// @param event Event data.
         /// @param options Event format options.
-        virtual void log(const LogEventOptions &options, const LogEvent &log) = 0;
+        virtual void log(const LogEventOptions &options, const LogEvent &event) = 0;
 
     protected:
         LogLevel level = INFO;

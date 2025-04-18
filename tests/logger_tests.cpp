@@ -9,12 +9,55 @@
 #include <cpplog/common/log_level.h>
 #include <source_location>
 
-#include "mocks/mock_sink.h"
+#include "helpers/mock_sink.h"
 
 using namespace std;
 using namespace cpplog;
-using namespace cpplog::mocks;
+using namespace cpplog::helpers;
 using namespace cpplog::common;
+
+TEST(LoggerTest, CanLogAllLevels)
+{
+    // Arrange
+    const string expectedMessage = "Debug message";
+    auto logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
+    auto mockSink = make_unique<MockSink>(DEBUG, logs);
+    const auto logger = LoggerConfiguration()
+                  .setLoggerFilteringLevel(DEBUG)
+                  .addSink(std::move(mockSink))
+                  .build();
+
+    // Act
+    logger->debug(expectedMessage);
+    logger->info(expectedMessage);
+    logger->warning(expectedMessage);
+    logger->error(expectedMessage);
+    logger->critical(expectedMessage);
+
+    // Assert
+    ASSERT_EQ(logs->size(), 5);
+}
+
+TEST(LoggerTest, TemplateCanLogAllLevels)
+{
+    // Arrange
+    auto logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
+    auto mockSink = make_unique<MockSink>(DEBUG, logs);
+    auto logger = LoggerConfiguration()
+                  .setLoggerFilteringLevel(DEBUG)
+                  .addSink(std::move(mockSink))
+                  .build();
+
+    // Act
+    logger->debug(source_location::current(),"Debug message {0}", 345);
+    logger->info(source_location::current(),"Debug message {0}", false);
+    logger->warning(source_location::current(),"Debug message {0}", "sdfsd");
+    logger->error(source_location::current(),"Debug message {0}", -1);
+    logger->critical(source_location::current(),"Debug message {0}", 0.01);
+
+    // Assert
+    ASSERT_EQ(logs->size(), 5);
+}
 
 TEST(LoggerTest, LogsMessageAtLevel)
 {

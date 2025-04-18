@@ -19,7 +19,7 @@ add_library(cpplog SHARED
         src/cpplog.cpp
         src/sinks/stdout_sink.cpp
         src/extensions/formatter.cpp
-        src/extensions/formatter.h)
+        src/sinks/file_sink.cpp)
 
 target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)
 

@@ -7,6 +7,8 @@
 #include <cpplog/cpplog.h>
 #include <cpplog/logger_configuration.h>
 #include <cpplog/sinks/stdout_sink.h>
+#include <cpplog/sinks/file_sink.h>
+#include <cpplog/common/file_sink_options.h>
 
 using namespace cpplog;
 using namespace cpplog::sinks;
@@ -25,7 +27,6 @@ void LoggerConfiguration::configure() {
     CppLog::configure(move(logger));
 }
 
-
 LoggerConfiguration& LoggerConfiguration::setLoggerFilteringLevel(const LogLevel level) {
     this->level = level;
     return *this;
@@ -38,5 +39,11 @@ LoggerConfiguration &LoggerConfiguration::addSink(unique_ptr<Sink> sink) {
 
 LoggerConfiguration &LoggerConfiguration::addStdoutSink(LogLevel level) {
     sinks.push_back(make_unique<StdoutSink>(level));
+    return *this;
+}
+
+LoggerConfiguration &LoggerConfiguration::addFileSink(FileSinkOptions options, LogLevel level)
+{
+    sinks.push_back(make_unique<FileSink>(level, move(options)));
     return *this;
 }

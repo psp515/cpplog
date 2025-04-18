@@ -18,7 +18,10 @@ set(CPPLOG_SOURCES
         extensions/formatter_tests.cpp
         logger_tests.cpp
         cpplog_tests.cpp
-        sinks/stdout_sink_tests.cpp)
+        sinks/stdout_sink_tests.cpp
+        sinks/file_sink_tests.cpp
+        logger_configuration_tests.cpp
+        helpers/file_helpers.cpp)
 
 add_executable(unit_tests ${CPPLOG_SOURCES})
 

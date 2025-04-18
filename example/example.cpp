@@ -16,9 +16,11 @@ int main() {
         cout << "Hello World!" << endl;
 
         LoggerConfiguration configuration;
+        FileSinkOptions opts;
 
         configuration.setLoggerFilteringLevel(INFO)
             .addStdoutSink()
+            .addFileSink(FileSinkOptions(), WARN)
             .configure();
 
         CppLog::debug("Debug Level");

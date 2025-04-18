@@ -10,6 +10,8 @@
 #include <cpplog/logger.h>
 #include <cpplog/sink.h>
 
+#include "common/file_sink_options.h"
+
 using namespace  std;
 
 namespace cpplog {
@@ -41,6 +43,15 @@ namespace cpplog {
         /// @return Reference to this LoggerConfiguration for method chaining.
         ///
         LoggerConfiguration& addStdoutSink(LogLevel level = DEBUG);
+
+        ///
+        /// Adds a default standard output sink to the logger.
+        ///
+        /// @param options Configuration options for file sink.
+        /// @param level Override level for ignoring messages.
+        /// @return Reference to this LoggerConfiguration for method chaining.
+        ///
+        LoggerConfiguration& addFileSink(FileSinkOptions options, LogLevel level = DEBUG);
 
         ///
         /// Applies this configuration to the global/default logger instance.

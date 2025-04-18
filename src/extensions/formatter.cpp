@@ -44,7 +44,7 @@ string Formatter::format(const LogEvent &event) const
             oss << "[" << event.getSourceFunctionName() << "]";
         }
 
-        oss << event.getMessage() << endl;
+        oss << " " << event.getMessage() << endl;
     }
 
     return oss.str();
