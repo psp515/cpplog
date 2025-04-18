@@ -14,7 +14,9 @@ include_directories(${GTEST_INCLUDE_DIRS})
 enable_testing()
 
 set(CPPLOG_SOURCES
-        common/log_event_tests.cpp)
+        common/log_event_tests.cpp
+        logger_tests.cpp
+        extensions/formatter_tests.cpp)
 
 add_executable(unit_tests ${CPPLOG_SOURCES})
 

@@ -5,6 +5,8 @@
 #include <cpplog/common/log_event.h>
 #include <cpplog/sink.h>
 #include <vector>
+#include <tuple>
+#include <memory>
 
 using namespace std;
 
@@ -13,21 +15,17 @@ namespace cpplog::mocks {
 class MockSink final : public Sink {
 public:
 
+  	MockSink() = delete;
+
+    explicit MockSink(const LogLevel &level, shared_ptr<vector<pair<LogEvent, LogEventOptions>>> &logs) : Sink(level), logs(logs) {
+    }
+
 	void log(const LogEventOptions& options, const LogEvent& event) override {
-		logs.push_back(event);
-	}
-
-	const vector<variant<LogEvent, LogEventOptions>>* get_logs() const {
-		return &logs;
-	}
-
-	// Clear logs for test isolation
-	void clear_logs() const {
-		logs.clear();
+    	logs->push_back({event, options});
 	}
 
 private:
-	mutable vector<variant<LogEvent, LogEventOptions>> logs;
+	shared_ptr<vector<pair<LogEvent, LogEventOptions>>> logs;
 };
 
 } // namespace cpplog

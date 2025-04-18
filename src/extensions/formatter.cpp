@@ -11,19 +11,20 @@
 
 using namespace cpplog::extensions;
 
-string Formatter::format(const LogEventOptions &options, const LogEvent &event) {
+string Formatter::format(const LogEvent &event) const
+{
     ostringstream oss;
 
-    if (options.logAsJson()) {
+    if (this->options.logAsJson()) {
         oss << "{";
         oss << "\"time\": " << quoted(event.getTime()) << ",";
         oss << "\"level\": " << quoted(toString(event.getLevel())) << ",";
 
-        if (options.logWithThread()) {
+        if (this->options.logWithThread()) {
             oss << "\"thread\": " << event.getThread() << ",";
         }
 
-        if (options.logWithSource()) {
+        if (this->options.logWithSource()) {
             oss << "\"source_file\": " << quoted(event.getSourceFileName()) << ",";
             oss << "\"source_function\": " << quoted(event.getSourceFunctionName()) << ",";
         }
@@ -34,16 +35,16 @@ string Formatter::format(const LogEventOptions &options, const LogEvent &event) 
         oss << "[" << event.getTime() << "]";
         oss << "[" << toString(event.getLevel()) << "]";
 
-        if (options.logWithThread()) {
+        if (this->options.logWithThread()) {
             oss << "[" << event.getThread() << "]";
         }
 
-        if (options.logWithSource()) {
+        if (this->options.logWithSource()) {
             oss << "[" << event.getSourceFileName() << "]";
             oss << "[" << event.getSourceFunctionName() << "]";
         }
 
-        oss << "[" << event.getMessage() << "]";
+        oss << event.getMessage() << endl;
     }
 
     return oss.str();

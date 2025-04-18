@@ -161,14 +161,14 @@ namespace cpplog {
         }
 
     private:
-        void log(LogLevel level, const string &message, const source_location location) {
+        void log(const LogLevel level, const string &message, const source_location location) {
             const auto log_message = new LogEvent(level, message, location);
             this->log(*log_message);
         }
 
         template<class... Args>
         void log(const LogLevel level, const std::source_location &location,
-                 const format_string<Args...> fmt, Args &&... args) const {
+                 const format_string<Args...> fmt, Args &&... args) {
             this->log(level, format(fmt, forward<Args>(args)...), location);
         }
 

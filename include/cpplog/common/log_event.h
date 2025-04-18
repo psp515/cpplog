@@ -9,6 +9,7 @@
 #include <source_location>
 #include <thread>
 #include <chrono>
+#include <utility>
 
 using namespace std;
 
@@ -41,7 +42,7 @@ namespace cpplog::common
         ///
         /// @param level Level of event.
         /// @param message User message of event.
-        explicit LogEvent(const LogLevel& level, const string& message) : message(message), level(level), has_source(false)
+        explicit LogEvent(const LogLevel& level, string message) : level(level), message(std::move(message)), has_source(false)
         {
             this->thread = this_thread::get_id();
             this->timestamp = chrono::system_clock::to_time_t(chrono::system_clock::now());

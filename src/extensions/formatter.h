@@ -11,13 +11,21 @@
 
 using namespace cpplog::common;
 
-namespace cpplog::extensions {
-    class Formatter {
-        public:
-            string format(const LogEventOptions &options, const LogEvent &event);
+namespace cpplog::extensions
+{
+    class Formatter
+    {
+    public:
+        Formatter() = delete;
+
+        explicit Formatter(const LogEventOptions& options) : options(options) {}
+
+        [[nodiscard]] string format(const LogEvent& event) const;
+
+    private:
+        LogEventOptions options;
     };
 }
-
 
 
 #endif //TEXT_FORMATTER_H
