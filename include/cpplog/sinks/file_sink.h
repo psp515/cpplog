@@ -33,7 +33,7 @@ namespace cpplog
         /// @param options Event format options.
         void log(const LogEventOptions& options, const LogEvent& event) override;
 
-    protected:
+    private:
         static mutex mtx;
         FileSinkOptions options;
         string log_file;

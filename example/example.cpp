@@ -10,6 +10,7 @@
 #include <ostream>
 #include <cpplog/cpplog.h>
 #include <cpplog/logger_configuration.h>
+#include <cpplog/sinks/file_sink.h>
 
 using namespace std;
 using namespace cpplog;

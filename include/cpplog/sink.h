@@ -15,6 +15,7 @@ namespace cpplog {
     /// Base class representing sink. Sink should be secure for multithreading.
     class Sink {
     public:
+
         ///
         /// Disabled possibility to copy object.
         ///
@@ -25,7 +26,10 @@ namespace cpplog {
         ///
         Sink &operator=(Sink const &) = delete;
 
-        virtual ~Sink() = default;
+        ///
+        /// Disabled default ctor.
+        ///
+        Sink() = delete;
 
         ///
         /// Creates sink with specified base log level
@@ -41,6 +45,10 @@ namespace cpplog {
         /// @param options Event format options.
         virtual void log(const LogEventOptions &options, const LogEvent &event) = 0;
 
+        ///
+        /// Virtual destructor for overloading.
+        ///
+        virtual ~Sink() = default;
     protected:
         LogLevel level = INFO;
     };

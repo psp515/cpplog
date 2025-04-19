@@ -5,7 +5,6 @@
 #include <cpplog/common/log_event.h>
 #include <cpplog/sink.h>
 #include <vector>
-#include <tuple>
 #include <memory>
 
 using namespace std;
@@ -17,7 +16,7 @@ namespace cpplog::helpers {
 
   		MockSink() = delete;
 
-	    explicit MockSink(const LogLevel &level, shared_ptr<vector<pair<LogEvent, LogEventOptions>>> &logs) : Sink(level), logs(logs) {
+	    explicit MockSink(const LogLevel &level, const shared_ptr<vector<pair<LogEvent, LogEventOptions>>> &logs) : Sink(level), logs(logs) {
 	    }
 
 		void log(const LogEventOptions& options, const LogEvent& event) override {
