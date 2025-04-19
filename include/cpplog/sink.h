@@ -1,5 +1,5 @@
 //
-// Created by kolbe on 10.04.2025.
+// Created by psp515 on 10.04.2025.
 //
 
 #ifndef SINK_H

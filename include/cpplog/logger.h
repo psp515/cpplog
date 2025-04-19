@@ -1,5 +1,5 @@
 //
-// Created by kolbe on 10.04.2025.
+// Created by psp515 on 10.04.2025.
 //
 
 #ifndef LOGGER_H
@@ -167,7 +167,7 @@ namespace cpplog {
         }
 
         template<class... Args>
-        void log(const LogLevel level, const std::source_location &location,
+        void log(const LogLevel level, const source_location &location,
                  const format_string<Args...> fmt, Args &&... args) {
             this->log(level, format(fmt, forward<Args>(args)...), location);
         }

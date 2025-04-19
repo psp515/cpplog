@@ -19,7 +19,10 @@ add_library(cpplog SHARED
         src/cpplog.cpp
         src/sinks/stdout_sink.cpp
         src/extensions/formatter.cpp
-        src/sinks/file_sink.cpp)
+        src/sinks/file_sink.cpp
+        include/cpplog/common/rotation_file_sink_options.h
+        src/sinks/rotation_file_sink.cpp
+)
 
 target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)
 

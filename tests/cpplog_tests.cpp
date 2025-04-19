@@ -1,5 +1,5 @@
 //
-// Created by kolbe on 18.04.2025.
+// Created by psp515 on 18.04.2025.
 //
 
 
@@ -21,7 +21,7 @@ TEST(CppLogTest, CanLogAllLevels)
     auto mockSink = make_unique<MockSink>(DEBUG, logs);
     LoggerConfiguration()
       .setLoggerFilteringLevel(DEBUG)
-      .addSink(std::move(mockSink))
+      .addSink(move(mockSink))
       .configure();
 
     // Act
@@ -42,7 +42,7 @@ TEST(CppLogTest, TemplateCanLogAllLevels)
     auto mockSink = make_unique<MockSink>(DEBUG, logs);
     LoggerConfiguration()
       .setLoggerFilteringLevel(DEBUG)
-      .addSink(std::move(mockSink))
+      .addSink(move(mockSink))
       .configure();
 
     // Act
@@ -63,7 +63,7 @@ TEST(CppLogTest, LogsMessageAtLevel) {
     auto mockSink = make_unique<MockSink>(INFO, logs);
     LoggerConfiguration()
         .setLoggerFilteringLevel(INFO)
-        .addSink(std::move(mockSink))
+        .addSink(move(mockSink))
         .configure();
 
     // Act
@@ -84,7 +84,7 @@ TEST(CppLogTest, DoesNotLogBelowConfiguredLevel) {
     auto mockSink = make_unique<MockSink>(WARN, logs);
     LoggerConfiguration()
         .setLoggerFilteringLevel(WARN)
-        .addSink(std::move(mockSink))
+        .addSink(move(mockSink))
         .configure();
 
     // Act
@@ -96,12 +96,12 @@ TEST(CppLogTest, DoesNotLogBelowConfiguredLevel) {
 
 TEST(CppLogTest, LogsWithSourceLocation) {
     // Arrange
-    const std::string msg = "Log with explicit location";
+    const string msg = "Log with explicit location";
     auto logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
     auto mockSink = make_unique<MockSink>(INFO, logs);
     LoggerConfiguration()
         .setLoggerFilteringLevel(INFO)
-        .addSink(std::move(mockSink))
+        .addSink(move(mockSink))
         .configure();
 
     // Act
@@ -118,12 +118,12 @@ TEST(CppLogTest, LogsWithSourceLocation) {
 
 TEST(CppLogTest, TemplateLogsWithSourceLocation) {
     // Arrange
-    const std::string msg = "Log with explicit location 1";
+    const string msg = "Log with explicit location 1";
     auto logs = make_shared<vector<pair<LogEvent, LogEventOptions>>>();
     auto mockSink = make_unique<MockSink>(WARN, logs);
     LoggerConfiguration()
         .setLoggerFilteringLevel(INFO)
-        .addSink(std::move(mockSink))
+        .addSink(move(mockSink))
         .configure();
 
     // Act

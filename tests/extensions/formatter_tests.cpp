@@ -1,5 +1,5 @@
 //
-// Created by kolbe on 18.04.2025.
+// Created by psp515 on 18.04.2025.
 //
 
 #include <gtest/gtest.h>
@@ -30,7 +30,7 @@ TEST(FormatterTest, FormatWithoutThreadAndSource) {
     // Assert
     EXPECT_TRUE(result.find("[INFO]") != string::npos);
     EXPECT_TRUE(result.find("[") != string::npos);
-    EXPECT_EQ(std::count(result.begin(), result.end(), '['), 2);
+    EXPECT_EQ(count(result.begin(), result.end(), '['), 2);
     EXPECT_TRUE(result.find("Message") != string::npos);
 }
 
@@ -90,7 +90,7 @@ TEST(FormatterTest, FormatWithThreadId) {
 
     // Assert
     EXPECT_TRUE(result.find("[") != string::npos);
-    EXPECT_EQ(std::count(result.begin(), result.end(), '['), 3);
+    EXPECT_EQ(count(result.begin(), result.end(), '['), 3);
     EXPECT_TRUE(result.find("[" + threadIdStr + "]") != string::npos);
 }
 
@@ -106,9 +106,9 @@ TEST(FormatterTest, FormatWithSourceFileAndFunction) {
 
     // Assert
     EXPECT_TRUE(result.find("[") != string::npos);
-    EXPECT_EQ(std::count(result.begin(), result.end(), '['), 4);
-    EXPECT_TRUE(result.find("FormatWithSourceFileAndFunction") != std::string::npos);
-    EXPECT_TRUE(result.find("formatter_tests.cpp") != std::string::npos);
+    EXPECT_EQ(count(result.begin(), result.end(), '['), 4);
+    EXPECT_TRUE(result.find("FormatWithSourceFileAndFunction") != string::npos);
+    EXPECT_TRUE(result.find("formatter_tests.cpp") != string::npos);
 }
 
 TEST(FormatterTest, FormatWithUnknownSourceFileAndFunction) {
@@ -122,7 +122,7 @@ TEST(FormatterTest, FormatWithUnknownSourceFileAndFunction) {
 
     // Assert
     EXPECT_TRUE(result.find("[") != string::npos);
-    EXPECT_EQ(std::count(result.begin(), result.end(), '['), 4);
+    EXPECT_EQ(count(result.begin(), result.end(), '['), 4);
     EXPECT_TRUE(result.find("[Unknown]") != string::npos);
 }
 

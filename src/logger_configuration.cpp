@@ -8,7 +8,9 @@
 #include <cpplog/logger_configuration.h>
 #include <cpplog/sinks/stdout_sink.h>
 #include <cpplog/sinks/file_sink.h>
+#include <cpplog/sinks/rotation_file_sink.h>
 #include <cpplog/common/file_sink_options.h>
+#include <cpplog/common/rotation_file_sink_options.h>
 
 using namespace cpplog;
 using namespace cpplog::sinks;
@@ -45,5 +47,11 @@ LoggerConfiguration &LoggerConfiguration::addStdoutSink(LogLevel level) {
 LoggerConfiguration &LoggerConfiguration::addFileSink(FileSinkOptions options, LogLevel level)
 {
     sinks.push_back(make_unique<FileSink>(level, move(options)));
+    return *this;
+}
+
+LoggerConfiguration &LoggerConfiguration::addRotationFileSink(RotationFileSinkOptions options, LogLevel level)
+{
+    sinks.push_back(make_unique<RotationFileSink>(level, move(options)));
     return *this;
 }

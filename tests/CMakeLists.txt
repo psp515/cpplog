@@ -21,7 +21,8 @@ set(CPPLOG_SOURCES
         sinks/stdout_sink_tests.cpp
         sinks/file_sink_tests.cpp
         logger_configuration_tests.cpp
-        helpers/file_helpers.cpp)
+        helpers/file_helpers.cpp
+        sinks/rotation_file_sink_tests.cpp)
 
 add_executable(unit_tests ${CPPLOG_SOURCES})
 

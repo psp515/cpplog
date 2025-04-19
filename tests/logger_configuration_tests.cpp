@@ -1,5 +1,5 @@
 //
-// Created by kolbe on 18.04.2025.
+// Created by psp515 on 18.04.2025.
 //
 
 #include <string>
@@ -70,7 +70,7 @@ TEST(LoggerConfigurationTests, AddsCustomSink) {
     auto mockSink = make_unique<MockSink>(INFO, logs);
     LoggerConfiguration()
       .setLoggerFilteringLevel(INFO)
-      .addSink(std::move(mockSink))
+      .addSink(move(mockSink))
       .configure();
 
     // Act
@@ -124,7 +124,7 @@ TEST(LoggerConfigurationTests, SetsDefaultFilteringLevel) {
     auto mockSink = make_unique<MockSink>(INFO, logs);
     LoggerConfiguration()
       .setLoggerFilteringLevel(CRITICAL)
-      .addSink(std::move(mockSink))
+      .addSink(move(mockSink))
       .configure();
 
     // Act

@@ -1,5 +1,5 @@
 //
-// Created by kolbe on 18.04.2025.
+// Created by psp515 on 18.04.2025.
 //
 
 #include <string>
@@ -10,6 +10,8 @@
 #include <cpplog/logger.h>
 #include <cpplog/cpplog.h>
 #include <cpplog/logger_configuration.h>
+#include <cpplog/common/file_sink_options.h>
+#include <cpplog/sinks/file_sink.h>
 
 #include "../helpers/file_helpers.h"
 

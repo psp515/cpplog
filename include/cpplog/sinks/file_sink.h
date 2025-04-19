@@ -1,5 +1,5 @@
 //
-// Created by kolbe on 18.04.2025.
+// Created by psp515 on 18.04.2025.
 //
 
 #ifndef FILE_SINK_H
@@ -33,7 +33,7 @@ namespace cpplog
         /// @param options Event format options.
         void log(const LogEventOptions& options, const LogEvent& event) override;
 
-    private:
+    protected:
         static mutex mtx;
         FileSinkOptions options;
         string log_file;

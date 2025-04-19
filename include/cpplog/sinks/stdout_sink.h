@@ -17,7 +17,7 @@ using namespace cpplog::common;
 
 namespace cpplog::sinks {
 
-    /// Sinks sends filtered messages to std::cout.
+    /// Sinks sends filtered messages to cout.
     class StdoutSink final : public Sink {
     public:
         ///

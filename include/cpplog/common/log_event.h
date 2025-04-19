@@ -1,5 +1,5 @@
 //
-// Created by kolbe on 10.04.2025.
+// Created by psp515 on 10.04.2025.
 //
 
 #ifndef LOG_EVENT_H
@@ -42,7 +42,7 @@ namespace cpplog::common
         ///
         /// @param level Level of event.
         /// @param message User message of event.
-        explicit LogEvent(const LogLevel& level, string message) : level(level), message(std::move(message)), has_source(false)
+        explicit LogEvent(const LogLevel& level, string message) : level(level), message(move(message)), has_source(false)
         {
             this->thread = this_thread::get_id();
             this->timestamp = chrono::system_clock::to_time_t(chrono::system_clock::now());

@@ -7,10 +7,11 @@
 
 #include <memory>
 #include <cpplog/common/log_event.h>
+#include <cpplog/common/rotation_file_sink_options.h>
+#include <cpplog/common/file_sink_options.h>
 #include <cpplog/logger.h>
 #include <cpplog/sink.h>
 
-#include "common/file_sink_options.h"
 
 using namespace  std;
 
@@ -45,13 +46,22 @@ namespace cpplog {
         LoggerConfiguration& addStdoutSink(LogLevel level = DEBUG);
 
         ///
-        /// Adds a default standard output sink to the logger.
+        /// Adds a file sink to the logger.
         ///
         /// @param options Configuration options for file sink.
         /// @param level Override level for ignoring messages.
         /// @return Reference to this LoggerConfiguration for method chaining.
         ///
         LoggerConfiguration& addFileSink(FileSinkOptions options, LogLevel level = DEBUG);
+
+        ///
+        /// Adds a file sink with rotation to the logger.
+        ///
+        /// @param options Configuration options for file sink.
+        /// @param level Override level for ignoring messages.
+        /// @return Reference to this LoggerConfiguration for method chaining.
+        ///
+        LoggerConfiguration& addRotationFileSink(RotationFileSinkOptions options, LogLevel level = DEBUG);
 
         ///
         /// Applies this configuration to the global/default logger instance.

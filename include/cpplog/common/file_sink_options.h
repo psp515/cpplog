@@ -1,5 +1,5 @@
 //
-// Created by kolbe on 18.04.2025.
+// Created by psp515 on 18.04.2025.
 //
 
 #ifndef FILE_SINK_ERRORS_H
@@ -27,11 +27,11 @@ namespace cpplog::common
         ///
         /// Creates options for file sink, with properties provided by user.
         ///
-        /// @param file_name Name of the log file.
+        /// @param file_name Name of the log file with extnesion.
         /// @param folder_name Name of the folder where logs will be stored.
         /// @param clean_on_initialize Tells when initializing sink, file for logs should be cleaned.
-        FileSinkOptions(string file_name, string folder_name, bool clean_on_initialize)
-            : log_file_name(std::move(file_name)), log_folder_name(std::move(folder_name)), clean(clean_on_initialize)
+        FileSinkOptions(const string& file_name, const string& folder_name, const bool clean_on_initialize)
+            : log_file_name(file_name), log_folder_name(folder_name), clean(clean_on_initialize)
         {
         }
 
@@ -49,7 +49,7 @@ namespace cpplog::common
 
 
         ///
-        /// Property tells if we should clean file on initialize.
+        /// Property tells if we should clean all logs on initialize.
         ///
         /// @return If file should be cleaned on initialize.
         [[nodiscard]] bool cleanOnInitialize() const { return clean; }
