@@ -12,7 +12,7 @@
 using namespace cpplog::common;
 
 namespace cpplog {
-    /// Base class representing sink.
+    /// Base class representing sink. Sink should be secure for multithreading.
     class Sink {
     public:
         ///
@@ -35,7 +35,7 @@ namespace cpplog {
         }
 
         ///
-        /// Function used to log event to specified sink.
+        /// Function used to log event to specified sink. Function should be resistible to multithreading.
         ///
         /// @param event Event data.
         /// @param options Event format options.

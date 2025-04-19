@@ -20,7 +20,6 @@ add_library(cpplog SHARED
         src/sinks/stdout_sink.cpp
         src/extensions/formatter.cpp
         src/sinks/file_sink.cpp
-        include/cpplog/common/rotation_file_sink_options.h
         src/sinks/rotation_file_sink.cpp
 )
 
