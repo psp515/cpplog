@@ -7,6 +7,12 @@
 
 #include <string>
 
+#undef DEBUG
+#undef INFO
+#undef WARN
+#undef ERROR
+#undef CRITICAL
+
 using namespace std;
 
 namespace cpplog::common {

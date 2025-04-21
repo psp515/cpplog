@@ -10,8 +10,7 @@
 #include <cpplog/common/log_event.h>
 #include <cpplog/common/log_event_options.h>
 #include <cpplog/common/log_level.h>
-
-#include "../src/extensions/formatter.h"
+#include <cpplog/extensions/formatter.h>
 
 using namespace std;
 using namespace cpplog;

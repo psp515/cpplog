@@ -2,12 +2,11 @@
 // Created by psp515 on 15.04.2025.
 //
 
-#include "formatter.h"
+
 
 #include <sstream>
 #include <cpplog/cpplog.h>
-
-#include "formatter.h"
+#include <cpplog/extensions/formatter.h>
 
 using namespace cpplog::extensions;
 
@@ -44,7 +43,7 @@ string Formatter::format(const LogEvent &event) const
             oss << "[" << event.getSourceFunctionName() << "]";
         }
 
-        oss << " " << event.getMessage() << endl;
+        oss << " " << event.getMessage();
     }
 
     return oss.str();

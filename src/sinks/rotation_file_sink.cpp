@@ -14,8 +14,7 @@
 #include <cpplog/common/log_event.h>
 #include <cpplog/common/log_event_options.h>
 #include <cpplog/common/rotation_file_sink_options.h>
-
-#include "../extensions/formatter.h"
+#include <cpplog/extensions/formatter.h>
 
 using namespace cpplog::sinks;
 using namespace cpplog::common;

@@ -10,8 +10,7 @@
 #include <sstream>
 #include <iomanip>
 #include <ctime>
-
-#include "../src/extensions/formatter.h"
+#include <cpplog/extensions/formatter.h>
 
 using namespace std;
 using namespace cpplog;

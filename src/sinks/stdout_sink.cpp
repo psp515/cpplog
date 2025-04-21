@@ -5,8 +5,7 @@
 #include <cpplog/sinks/stdout_sink.h>
 #include <iostream>
 #include <mutex>
-
-#include "../extensions/formatter.h"
+#include <cpplog/extensions/formatter.h>
 
 using namespace std;
 using namespace cpplog::sinks;

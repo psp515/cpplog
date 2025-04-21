@@ -2,6 +2,14 @@
 // Created by psp515 on 02.03.2025.
 //
 
+#define NOMINMAX
+#define byte win_byte_override
+#include <winsock2.h>
+#include <windows.h>
+#undef byte
+#include <cstddef>
+
+
 #include <exception>
 #include <iostream>
 #include <thread>
@@ -12,7 +20,8 @@
 #include <cpplog/logger_configuration.h>
 #include <cpplog/sinks/file_sink.h>
 
-using namespace std;
+#include "http/win_http_sink.h"
+
 using namespace cpplog;
 
 void randomSleep(int minMs, int maxMs) {
@@ -24,7 +33,7 @@ void randomSleep(int minMs, int maxMs) {
     std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
 }
 
-void thread_actions()
+void threadActions()
 {
     for (int i = 0; i < 5; ++i)
     {
@@ -33,9 +42,32 @@ void thread_actions()
     }
 }
 
+void heartBeat()
+{
+    const auto options = LogEventOptions(false, true, false);
+
+    auto local_logger = LoggerConfiguration()
+        .setLoggerFilteringLevel(INFO)
+        .addStdoutSink()
+        .build();
+
+    local_logger->setLogEventOptions(options);
+
+    while (true) {
+        try
+        {
+            CppLog::info("Heartbeat log...");
+            randomSleep(1000, 3000);
+        } catch (std::exception &ex)
+        {
+            local_logger->error("Failed to send message. " + std::string(ex.what()));
+        }
+    }
+}
+
 int main() {
     try {
-        cout << "Hello World!" << endl;
+        std::cout << "Hello World!" << std::endl;
 
         // Configuration Example
         const auto opts = FileSinkOptions("logfile", "loggs", true);
@@ -71,19 +103,35 @@ int main() {
         CppLog::critical("Starting multi threading");
 
         // Threading example
-        thread t1(thread_actions);
-        thread t2(thread_actions);
-        thread t3(thread_actions);
-        thread t4(thread_actions);
+        // thread t1(threadActions);
+        // thread t2(threadActions);
+        // thread t3(threadActions);
+        // thread t4(threadActions);
+        //
+        // t1.join();
+        // t2.join();
+        // t3.join();
+        // t4.join();
 
-        t1.join();
-        t2.join();
-        t3.join();
-        t4.join();
+        // Example shows how to configure custom sink / this sink sends http messages to prepared server.
+        CppLog::critical("Starting Http Example");
 
-        CppLog::critical("Final message thread");
+        const auto winOptions = WinHttpSinkOptions("/logs/single", "5254", "localhost");
+        auto winSink = make_unique<WinHttpSink>(INFO, winOptions);
 
-        return 0;
+        LoggerConfiguration()
+            .setLoggerFilteringLevel(INFO)
+            .addSink(move(winSink))
+            .configure();
+
+        CppLog::setLogEventOptions(jsonOptions);
+
+        thread th1(heartBeat);
+        thread th2(heartBeat);
+
+        th1.join();
+        th2.join();
+
     } catch (const exception& e) {
         cout << "Exception: " << e.what() << endl;
         return 1;

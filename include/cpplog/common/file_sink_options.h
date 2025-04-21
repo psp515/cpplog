@@ -6,7 +6,7 @@
 #define FILE_SINK_ERRORS_H
 
 #include <string>
-#include <utility>
+#include <stdexcept>
 
 using namespace std;
 
@@ -30,9 +30,18 @@ namespace cpplog::common
         /// @param file_name Name of the log file with extnesion.
         /// @param folder_name Name of the folder where logs will be stored.
         /// @param clean_on_initialize Tells when initializing sink, file for logs should be cleaned.
-        FileSinkOptions(const string& file_name, const string& folder_name, const bool clean_on_initialize)
+        explicit FileSinkOptions(const string& file_name, const string& folder_name, const bool clean_on_initialize)
             : log_file_name(file_name), log_folder_name(folder_name), clean(clean_on_initialize)
         {
+            if (log_file_name.empty())
+            {
+                throw invalid_argument("Log file name cannot be empty.");
+            }
+
+            if (log_folder_name.empty())
+            {
+                throw invalid_argument("Log folder name cannot be empty.");
+            }
         }
 
         ///

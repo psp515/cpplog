@@ -44,13 +44,13 @@ LoggerConfiguration &LoggerConfiguration::addStdoutSink(LogLevel level) {
     return *this;
 }
 
-LoggerConfiguration &LoggerConfiguration::addFileSink(FileSinkOptions options, LogLevel level)
+LoggerConfiguration &LoggerConfiguration::addFileSink(const FileSinkOptions& options, LogLevel level)
 {
     sinks.push_back(make_unique<FileSink>(level, move(options)));
     return *this;
 }
 
-LoggerConfiguration &LoggerConfiguration::addRotationFileSink(RotationFileSinkOptions options, LogLevel level)
+LoggerConfiguration &LoggerConfiguration::addRotationFileSink(const RotationFileSinkOptions& options, LogLevel level)
 {
     sinks.push_back(make_unique<RotationFileSink>(level, move(options)));
     return *this;

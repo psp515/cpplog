@@ -52,7 +52,7 @@ namespace cpplog {
         /// @param level Override level for ignoring messages.
         /// @return Reference to this LoggerConfiguration for method chaining.
         ///
-        LoggerConfiguration& addFileSink(FileSinkOptions options, LogLevel level = DEBUG);
+        LoggerConfiguration& addFileSink(const FileSinkOptions& options, LogLevel level = DEBUG);
 
         ///
         /// Adds a file sink with rotation to the logger.
@@ -61,7 +61,7 @@ namespace cpplog {
         /// @param level Override level for ignoring messages.
         /// @return Reference to this LoggerConfiguration for method chaining.
         ///
-        LoggerConfiguration& addRotationFileSink(RotationFileSinkOptions options, LogLevel level = DEBUG);
+        LoggerConfiguration& addRotationFileSink(const RotationFileSinkOptions& options, LogLevel level = DEBUG);
 
         ///
         /// Applies this configuration to the global/default logger instance.

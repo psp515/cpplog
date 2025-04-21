@@ -21,8 +21,6 @@ add_library(cpplog SHARED
         src/extensions/formatter.cpp
         src/sinks/file_sink.cpp
         src/sinks/rotation_file_sink.cpp
-        include/cpplog/sinks/win_http_sink.h
-        src/sinks/win_http_sink.cpp
 )
 
 target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)
@@ -39,15 +37,23 @@ set_target_properties(cpplog PROPERTIES VERSION 1.0)
 # Build Example
 # ---------------------------------------------------------------------------------------
 
-message("Building Example")
-add_subdirectory(example)
+option(BUILD_EXAMPLES "Build the examples" ON)
+
+if(BUILD_EXAMPLES)
+    message("Building Example")
+    add_subdirectory(example)
+endif()
 
 # ---------------------------------------------------------------------------------------
 # Build Test
 # ---------------------------------------------------------------------------------------
 
-message("Building Tests")
-add_subdirectory(tests)
+option(BUILD_TESTS "Build the tests" ON)
+
+if(BUILD_TESTS)
+    message("Building Tests")
+    add_subdirectory(tests)
+endif()
 
 # ---------------------------------------------------------------------------------------
 # INSTALL

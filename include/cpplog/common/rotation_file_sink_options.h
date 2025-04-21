@@ -37,7 +37,7 @@ namespace cpplog::common
         /// @param clean_on_initialize Tells when initializing sink, file for logs should be cleaned.
         /// @param historicalFiles Number of historical (rotated) log files to keep.
         /// @param maximalFileSizeInKiloBytes Maximum allowed size of a log file in kilobytes before rotation.
-        RotationFileSinkOptions(const size_t historicalFiles, const size_t maximalFileSizeInKiloBytes,
+        explicit RotationFileSinkOptions(const size_t historicalFiles, const size_t maximalFileSizeInKiloBytes,
                                 const string& file_name, const string& folder_name,
                                 const bool clean_on_initialize) :
             FileSinkOptions(file_name, folder_name, clean_on_initialize), numberOfHistoricalFiles(historicalFiles),
