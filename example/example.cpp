@@ -89,13 +89,13 @@ int main() {
         // - Now message contains thread and source information
         const auto options = LogEventOptions(false, true, true);
         CppLog::setLogEventOptions(options);
-        CppLog::critical("Override file options example");
+        CppLog::critical("Override file options");
 
         // Override options example 2
         // - Now message is json
         const auto jsonOptions = LogEventOptions(true, true, true);
         CppLog::setLogEventOptions(jsonOptions);
-        CppLog::critical("Critical json");
+        CppLog::critical("json");
 
         // Override options
         CppLog::setLogEventOptions(options);
@@ -103,15 +103,15 @@ int main() {
         CppLog::critical("Starting multi threading");
 
         // Threading example
-        // thread t1(threadActions);
-        // thread t2(threadActions);
-        // thread t3(threadActions);
-        // thread t4(threadActions);
-        //
-        // t1.join();
-        // t2.join();
-        // t3.join();
-        // t4.join();
+        thread t1(threadActions);
+        thread t2(threadActions);
+        thread t3(threadActions);
+        thread t4(threadActions);
+
+        t1.join();
+        t2.join();
+        t3.join();
+        t4.join();
 
         // Example shows how to configure custom sink / this sink sends http messages to prepared server.
         CppLog::critical("Starting Http Example");

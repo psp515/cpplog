@@ -10,24 +10,18 @@
 namespace cpplog::common
 {
     /// Options class for file sink with rotation.
-    class RotationFileSinkOptions : public FileSinkOptions
+    class RotationFileSinkOptions final : public FileSinkOptions
     {
     public:
         /// Default constructor sets fields to default values.
-        RotationFileSinkOptions() : FileSinkOptions(), numberOfHistoricalFiles(1), maximalFileSize(1024)
-        {
-        }
+        RotationFileSinkOptions();
 
         ///
         /// Allows setting custom values for number of historical files and maximum file size
         ///
         /// @param historicalFiles Number of historical (rotated) log files to keep.
         /// @param maximalFileSizeInKiloBytes Maximum allowed size of a log file in kilobytes before rotation.
-        RotationFileSinkOptions(const size_t historicalFiles, const size_t maximalFileSizeInKiloBytes) :
-            FileSinkOptions(),
-            numberOfHistoricalFiles(historicalFiles), maximalFileSize(maximalFileSizeInKiloBytes)
-        {
-        }
+        RotationFileSinkOptions(const size_t historicalFiles, const size_t maximalFileSizeInKiloBytes);
 
         ///
         /// Creates options for rotation file sink, with properties provided by user.
@@ -39,11 +33,7 @@ namespace cpplog::common
         /// @param maximalFileSizeInKiloBytes Maximum allowed size of a log file in kilobytes before rotation.
         explicit RotationFileSinkOptions(const size_t historicalFiles, const size_t maximalFileSizeInKiloBytes,
                                 const string& file_name, const string& folder_name,
-                                const bool clean_on_initialize) :
-            FileSinkOptions(file_name, folder_name, clean_on_initialize), numberOfHistoricalFiles(historicalFiles),
-            maximalFileSize(maximalFileSizeInKiloBytes)
-        {
-        }
+                                const bool clean_on_initialize);
 
         ///
         /// Gets the number of historical log files to retain.
@@ -56,6 +46,9 @@ namespace cpplog::common
         ///
         /// @return  Maximum size of single file in kilobytes.
         [[nodiscard]] size_t getMaximalFileSizeKiloBytes() const { return maximalFileSize; }
+
+    protected:
+        void validate() override;
 
     private:
         size_t numberOfHistoricalFiles;

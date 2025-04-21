@@ -21,6 +21,8 @@ add_library(cpplog SHARED
         src/extensions/formatter.cpp
         src/sinks/file_sink.cpp
         src/sinks/rotation_file_sink.cpp
+        src/common/file_sink_options.cpp
+        src/common/rotation_file_sink_options.cpp
 )
 
 target_compile_definitions(cpplog PUBLIC cpplog_SHARED_LIB)

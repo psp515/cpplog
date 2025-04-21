@@ -19,10 +19,7 @@ namespace cpplog::common
         ///
         /// Creates default options for file sink. Initializes both the log file and folder name to "logs".
         ///
-        FileSinkOptions()
-            : log_file_name("logs.txt"), log_folder_name("logs"), clean(true)
-        {
-        }
+        FileSinkOptions();
 
         ///
         /// Creates options for file sink, with properties provided by user.
@@ -30,19 +27,7 @@ namespace cpplog::common
         /// @param file_name Name of the log file with extnesion.
         /// @param folder_name Name of the folder where logs will be stored.
         /// @param clean_on_initialize Tells when initializing sink, file for logs should be cleaned.
-        explicit FileSinkOptions(const string& file_name, const string& folder_name, const bool clean_on_initialize)
-            : log_file_name(file_name), log_folder_name(folder_name), clean(clean_on_initialize)
-        {
-            if (log_file_name.empty())
-            {
-                throw invalid_argument("Log file name cannot be empty.");
-            }
-
-            if (log_folder_name.empty())
-            {
-                throw invalid_argument("Log folder name cannot be empty.");
-            }
-        }
+        explicit FileSinkOptions(const string& file_name, const string& folder_name, const bool clean_on_initialize);
 
         ///
         /// Gets the configured log file name.
@@ -62,6 +47,18 @@ namespace cpplog::common
         ///
         /// @return If file should be cleaned on initialize.
         [[nodiscard]] bool cleanOnInitialize() const { return clean; }
+
+        ///
+        /// Virtual destructor for proper resource release.
+        ///
+        virtual ~FileSinkOptions() = default;
+
+    protected:
+
+        ///
+        /// Virtual validate function that is called by ctor on creation
+        ///
+        virtual void validate();
 
     private:
         string log_file_name;
