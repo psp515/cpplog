@@ -124,7 +124,7 @@ Easy to extend with custom sinks, simply by implementing the sink interface.
 - ConsoleSink – logs to standard output (stdout).
 - FileSink – logs to a file.
 - RotatingFileSink – logs to a file with automatic rotation, new file is created after a defined size limit is reached. You can specify the maximum number of historical log files to keep.
-- HttpSink – sends logs via HTTP/1.1, acts as an HTTP client sending log entries to a configured server endpoint. (repository also contains example http server under `server` folder)
+- (Example implementation for MinGW) HttpSink – sends logs via HTTP/1.1, acts as an HTTP client sending log entries to a configured server endpoint. (repository also contains example http server under `server` folder)
 
 ### Testing
 The library includes a comprehensive test suite built using Google Test. 
@@ -150,6 +150,12 @@ Easies way to run example is to use clion:
 - add configuration CMake application `example`
 - for this configuration set workdir to `build` folder (default `cmake-build-debug`)
 - run example
+
+### Internal Structure
+
+Internal structure is shown on below class diagram.
+
+![Architecture](/docs/Cpplog.drawio.png)
 
 ### License
 
