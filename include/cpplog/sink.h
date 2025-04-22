@@ -27,11 +27,6 @@ namespace cpplog {
         Sink &operator=(Sink const &) = delete;
 
         ///
-        /// Disabled default ctor.
-        ///
-        Sink() = delete;
-
-        ///
         /// Creates sink with specified base log level
         ///
         /// @param level Level for events to ignore.

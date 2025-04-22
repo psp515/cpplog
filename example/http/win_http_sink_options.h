@@ -15,9 +15,6 @@ using namespace std;
 class WinHttpSinkOptions
 {
 public:
-    /// Deleted default constructor to enforce custom initialization.
-    WinHttpSinkOptions() = delete;
-
     ///
     /// Constructs WinHttpSinkOptions with the given endpoint, port, and host.
     ///

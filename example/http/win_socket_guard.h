@@ -12,9 +12,6 @@
 class WinSocketGuard
 {
 public:
-    /// Deleted default constructor to enforce explicit initialization.
-    WinSocketGuard() = delete;
-
     ///
     ///  Constructs the WinSocketGuard with a given socket.
     ///

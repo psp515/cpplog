@@ -26,7 +26,7 @@ namespace cpplog::common
         ///
         /// Creates options for rotation file sink, with properties provided by user.
         ///
-        /// @param file_name Name of the log file with extnesion.
+        /// @param file_name Name of the log file with extension.
         /// @param folder_name Name of the folder where logs will be stored.
         /// @param clean_on_initialize Tells when initializing sink, file for logs should be cleaned.
         /// @param historicalFiles Number of historical (rotated) log files to keep.

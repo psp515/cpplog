@@ -13,9 +13,6 @@ namespace cpplog::helpers {
 
 	class MockSink final : public Sink {
 	public:
-
-  		MockSink() = delete;
-
 	    explicit MockSink(const LogLevel &level, const shared_ptr<vector<pair<LogEvent, LogEventOptions>>> &logs) : Sink(level), logs(logs) {
 	    }
 

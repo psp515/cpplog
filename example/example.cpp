@@ -37,7 +37,7 @@ void threadActions()
 {
     for (int i = 0; i < 5; ++i)
     {
-        CppLog::error(source_location::current(),"Info Level log: {0}", i);
+        CppLog::error(source_location::current(),"Error Level log: {0}", i);
         randomSleep(100, 1500);
     }
 }

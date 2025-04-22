@@ -17,9 +17,6 @@ namespace cpplog::extensions
     class Formatter
     {
     public:
-        /// Cannot create formatter without options.
-        Formatter() = delete;
-
         ///
         /// Creates formatter object with options.
         ///

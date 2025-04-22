@@ -22,10 +22,6 @@ namespace cpplog::common
     {
     public:
         ///
-        /// Disabled creating events without values.
-        LogEvent() = delete;
-
-        ///
         /// Creates system event with source.
         ///
         /// @param level Level of event.
